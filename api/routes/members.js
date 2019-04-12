@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 
-const Product = require('../models/product');
+const Member = require('../models/member');
 
 router.get('/', (req, res, next) => {
-    Product.find()
+    Member.find()
     .exec()
     .then(docs => {
         console.log(docs);
@@ -19,18 +19,18 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const product = new Product({
+    const member = new Member({
         _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
-        price: req.body.price
+        totalHours: req.body.totalHours
     });
-    product
+    member
     .save()
     .then(result =>{
         console.log(result);
         res.status(201).json({
-            message: 'handling post products',
-            createdProduct: result
+            message: 'handling post member',
+            createdMember: result
         });
     })
     .catch(err => {
@@ -43,13 +43,13 @@ router.post('/', (req, res, next) => {
 
 router.get('/:pId',(req, res, next) => {
     const id = req.params.pId;
-   Product.findById(id).exec()
+   Member.findById(id).exec()
    .then(doc => {
        console.log(doc);
        if(doc){
        res.status(200).json(doc)
        }else{
-           res.status(404).json({message: "Product not found with that ID"})
+           res.status(404).json({message: "Member not found with that ID"})
        }
 
    })
@@ -65,7 +65,7 @@ router.patch('/:pId',(req, res, next) => {
         updateOps[ops.propName] = ops.value;
     }
 
-    Product.update({_id: id},
+    Member.update({_id: id},
         {$set: updateOps      
     }).exec()
     .then(result =>{
@@ -81,7 +81,7 @@ router.patch('/:pId',(req, res, next) => {
 });
 router.delete('/:pId',(req, res, next) => {
     const id = req.params.pId;
-    Product.remove({_id: id})
+    Member.remove({_id: id})
     .exec()
     .then(result => {
         result.status(200).json(result);

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 
-const productRoutes = require('./api/routes/products');
+const memberRoutes = require('./api/routes/members');
 const orderRoutes = require('./api/routes/orders');
 //test
 mongoose.connect('mongodb+srv://admin:'+ 
@@ -31,7 +31,7 @@ app.use((req,res,next) => {
     next();
 });
 
-app.use('/products',productRoutes);
+app.use('/members',memberRoutes);
 app.use('/orders', orderRoutes);
 
 app.use((req,res,next) => {
