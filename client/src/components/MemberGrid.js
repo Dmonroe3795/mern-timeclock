@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Grid from '@material-ui/core/Grid'
 import Member from '../components/Member'
 import Typography from '@material-ui/core/Typography';
+import ResponsiveDrawer from './Layout/ResponsiveDrawer';
 
 export default class MemberGrid extends Component {
     state = {
@@ -23,11 +24,11 @@ export default class MemberGrid extends Component {
 
     render() {
         return (
-            <div>
+            <ResponsiveDrawer>
                 {this.state.members ? (
                     <div> 
                         <Grid container direction='column' alignContent='center'>
-                        <Typography gutterBottom variant="headline" component="h1" style={{fontWeight: "bold", marginTop: 25}}>
+                        <Typography gutterBottom variant="headline" component="h1" style={{fontWeight: "bold", marginTop: 0}}>
                             Members:
                         </Typography>
                         </Grid>
@@ -41,7 +42,7 @@ export default class MemberGrid extends Component {
                         </Grid>
                     </div>
                 ) : "No members found"}
-            </div>
+            </ResponsiveDrawer>
         )
     }
 }

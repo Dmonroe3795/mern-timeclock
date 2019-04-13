@@ -12,6 +12,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 WebFont.load({
   google: {
@@ -71,12 +72,13 @@ class Login extends Component {
                 <Tab label="Admin" />
               </Tabs>
         </AppBar>
-        <SwipeableViews className="full-width" style={{boxShadow: '0 5px 5px -2px darkgrey', width: "50vw"}}
+        <SwipeableViews className="full-width"
           axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <TabContainer dir={theme.direction}>
+            <Paper>
+            <TabContainer dir={theme.direction}>
           <Grid container direction="column" alignItems="center">
             <TextField style={{width: "50%"}}
               id="standard-with-placeholder"
@@ -102,6 +104,7 @@ class Login extends Component {
           </Grid>
           </TabContainer>
           <TabContainer dir={theme.direction}>Item Two</TabContainer>
+            </Paper>
         </SwipeableViews>
         </Grid>
         <div className={classes.root}>
