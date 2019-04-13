@@ -96,17 +96,18 @@ router.put('/:mId/:pId/clockin',(req,res,next) => {
     const pId = req.params.pId;
     const date = Date.now();
     const session = new Session({
-        partner: pId,
+        _id: new mongoose.Types.ObjectId(),
         member: mId,
         timeIn: date
     });
     session.save()
-    .then(result =>{
+    .then(result =>{ 
         Member.findOne({_id: mId}, function(error, member){
             if (error) {
                 return handleError(error);
               }
-              member.sessions.push(result);
+              member.sessions.push(result._id);
+              member.save();
         })
         console.log(result);
         res.status(201).json({

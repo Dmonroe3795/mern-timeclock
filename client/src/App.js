@@ -6,6 +6,7 @@ import MemberGrid from './components/MemberGrid';
 import { BrowserRouter, Link, Route } from 'react-router-dom'
 import './App.css';
 import Button from '@material-ui/core/Button';
+import Login from './components/Login';
 
 WebFont.load({
   google: {
@@ -32,6 +33,7 @@ export default class App extends Component {
             }/>
             <Route path="/Admin" component={MemberGrid}/>
             <Route path="/Dashboard" component={MemberGrid}/>
+            <Login />
       </BrowserRouter>
     );
   }
