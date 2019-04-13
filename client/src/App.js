@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, memo } from 'react';
+import NavBar from './components/NavBar';
+import MemberGrid from './components/MemberGrid';
 import logo from './sample-logo.png';
 import './App.css';
 
@@ -23,14 +25,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-        <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <button className="btn" type="submit">Get Members</button>
-        </form>
-        <p className="api-result">{this.state.responseToGet}</p>
+        <NavBar />
+        <MemberGrid />
       </div>
     );
   }
