@@ -67,89 +67,30 @@ class App extends Component {
       <NavBar/>
         <div className={classes.root}>
       </div>
-
-      <div className='App'>
-          <Grid container direction='column' alignContent='center' spacing={24} style={{padding:24}}>
-              <Link to="/">
+        <Grid container direction='column' alignContent='center' >
+          <Link exact to="/" style={{textDecoration: 'none', width: '50%', marginBottom: 20}} >
+            <Button  variant="outlined" color="primary"  size="large" style={{width: "100%"}} className={classes.margin}>
               Home
-              </Link>
-          </Grid>
-
-          <Route exact path="/" render={() => 
-            <Grid container direction="column" alignItems="center">
-            <AppBar position="static" color="default" style={{width: "50vw"}}>
-                <Tabs
-                  value={this.state.value}
-                  onChange={this.handleChange}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  variant="fullWidth"
-                >
-                  <Tab label="Member" />
-                  <Tab label="Admin" />
-                </Tabs>
-          </AppBar>
-          <SwipeableViews className="MuiPaper-elevation4-17 full-width" style={{width: "50vw"}}
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={this.state.value}
-            onChangeIndex={this.handleChangeIndex}
-          >
-            <TabContainer dir={theme.direction}>
-            <Grid container direction="column" alignItems="center">
-              <TextField style={{width: "50%"}}
-                id="standard-with-placeholder"
-                label="Email"
-                placeholder="Enter Email"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField style={{width: "50%"}}
-                id="standard-with-placeholder"
-                label="Password"
-                placeholder="Enter Password"
-                className={classes.textField}
-                margin="normal"
-                type="password"
-                autoComplete="current-password"
-              />
-              <Link exact to="/Dashboard" style={{textDecoration: 'none', width: '50%'}} >
-              <Button  variant="outlined" color="primary"  size="large" style={{width: "100%"}} className={classes.margin}>
-                Login
-                </Button>
-              </Link>
+            </Button>
+          </Link>
+        </Grid>
+            
+        <Route exact path="/" render={() =>
+            <Grid container direction='column' alignContent='center'>
+            <Link exact to="/AdminDashboard" style={{textDecoration: 'none', width: '50%', marginBottom: 20}} >
+            <Button  variant="outlined" color="primary"  size="large" style={{width: "100%"}} className={classes.margin}>
+              Member Dashboard
+              </Button>
+            </Link>
+            <Link exact to="/AdminDashboard" style={{textDecoration: 'none', width: '50%', marginBottom: 20}} >
+            <Button  variant="outlined" color="primary"  size="large" style={{width: "100%"}} className={classes.margin}>
+              Admin Dashboard
+              </Button>
+            </Link>
             </Grid>
-            </TabContainer>
-            <TabContainer dir={theme.direction}>
-            <Grid container direction="column" alignItems="center">
-              <TextField style={{width: "50%"}}
-                id="standard-with-placeholder"
-                label="Email"
-                placeholder="Enter Email"
-                className={classes.textField}
-                margin="normal"
-              />
-              <TextField style={{width: "50%"}}
-                id="standard-with-placeholder"
-                label="Password"
-                placeholder="Enter Password"
-                className={classes.textField}
-                margin="normal"
-                type="password"
-                autoComplete="current-password"
-              />
-              <Link exact to="/AdminDashboard" style={{textDecoration: 'none', width: '50%'}} >
-              <Button  variant="outlined" color="primary"  size="large" style={{width: "100%"}} className={classes.margin}>
-                Login
-                </Button>
-              </Link>
-            </Grid>
-            </TabContainer>
-          </SwipeableViews>
-          </Grid>
           }/>
           <Route path="/AdminDashboard" component={MemberGrid}/>
           <Route path="/Dashboard" component={MemberGrid}/>
-        </div>
       </BrowserRouter>
     );
   }

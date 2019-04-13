@@ -26,9 +26,11 @@ export default class MemberGrid extends Component {
             <div>
                 {this.state.members ? (
                     <div> 
+                        <Grid container direction='column' alignContent='center'>
                         <Typography gutterBottom variant="headline" component="h1" style={{fontWeight: "bold", marginTop: 25}}>
                             Members:
                         </Typography>
+                        </Grid>
                         <Grid container spacing={24} style={{padding:24}}>
                             { this.state.members.map(currentMember => (
                                 <Grid item xs={12} sm= {6} lg={4} xl={3}>

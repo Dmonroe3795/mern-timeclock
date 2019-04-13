@@ -59,7 +59,7 @@ class Login extends Component {
     return (
       <BrowserRouter>
         <Grid container direction="column" alignItems="center">
-          <AppBar position="static" color="default" style={{width: "50vw"}}>
+          <AppBar centered position="static" color="default" style={{width: "50vw"}}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
