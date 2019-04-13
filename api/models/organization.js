@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const GroupSchema = require('group');
+
 
 const organizationSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
-    groups:[GroupSchema]
+    groups:[{type: Schema.Types.ObjectId, ref: 'Group'}]
 });
 
 module.exports = mongoose.model('Organization', organizationSchema);
