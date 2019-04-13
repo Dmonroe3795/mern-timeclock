@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid'
 import Member from '../components/Member'
 import Typography from '@material-ui/core/Typography';
 
-class MemberGrid extends Component {
+export default class MemberGrid extends Component {
     state = {
         members: []
     }
@@ -43,5 +43,3 @@ class MemberGrid extends Component {
         )
     }
 }
-
-export default MemberGrid;
