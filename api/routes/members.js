@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 
 const Member = require('../models/member');
-
+const Session = require('../models/session');
 router.get('/', (req, res, next) => {
     Member.find()
     .exec()
@@ -91,5 +91,33 @@ router.delete('/:pId',(req, res, next) => {
         res.status(500).json({error: err});
     });
 });
+router.put('/:mId/:pId/clockin',(req,res,next) => {
+    const mId = req.params.mId;
+    const pId = req.params.pId;
+    const date = Date.now();
+    const session = new Session({
+        partner: pId,
+        member: mId,
+        timeIn: date
+    });
+    session.save()
+    .then(result =>{
+        Member.findOne({_id: mId}, function(error, member){
+            if (error) {
+                return handleError(error);
+              }
+              member.sessions.push(result);
+        })
+        console.log(result);
+        res.status(201).json({
+            message: 'handling post clockin',
+            createdSession: result
+        });
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json({error:err});
+    });
 
+
+})
 module.exports = router;
