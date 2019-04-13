@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './AB-logo.png';
+import logo from './sample-logo.png';
 import './App.css';
 
 class App extends Component {
@@ -28,9 +28,9 @@ class App extends Component {
         </header>
         <p>{this.state.response}</p>
         <form onSubmit={this.handleSubmit}>
-          <button type="submit">Get Members</button>
+          <button className="btn" type="submit">Get Members</button>
         </form>
-        <p>{this.state.responseToGet}</p>
+        <p className="api-result">{this.state.responseToGet}</p>
       </div>
     );
   }
