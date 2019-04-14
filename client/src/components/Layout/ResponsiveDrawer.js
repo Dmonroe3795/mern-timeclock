@@ -24,6 +24,9 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import GroupMenuList from './GroupMenuList'
+import PartnerMenuList from './PartnerMenuList'
+import SettingsMenuList from './SettingsMenuList'
 
 const drawerWidth = 240;
 
@@ -90,80 +93,9 @@ componentDidMount(){
             </MenuItem>
           </MenuList>
         </div>
-        
-        <Divider />
-        <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>Groups</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.paddingless}>
-        <List className={classes.fullWidth}>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="New Group" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Group 1" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Group 2" />
-          </ListItem>
-        </List>
-        </ExpansionPanelDetails>
-        </ExpansionPanel>
-        
-        <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography component={Link} to="/Admin" style={{textDecoration: "none", width: "100%"}}className={classes.heading}>Affiliates</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.paddingless}>
-        <List className={classes.fullWidth}>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="New Affliliate" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Reports" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Affiliate 1" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Affiliate 2" />
-          </ListItem>
-        </List>
-        </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography component={Link} to="/Dashboard" style={{textDecoration: "none", width: "100%"}}className={classes.heading}>Settings</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.paddingless}>
-        <List className={classes.fullWidth}>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="General" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Affiliate" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Theme" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary="Admin" />
-          </ListItem>
-        </List>
-        </ExpansionPanelDetails>
-        </ExpansionPanel>
+        <GroupMenuList />
+        <PartnerMenuList />
+        <SettingsMenuList />
       </div>
     );
 
