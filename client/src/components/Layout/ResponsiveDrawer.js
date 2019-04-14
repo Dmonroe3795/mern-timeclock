@@ -14,12 +14,16 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles} from '@material-ui/core/styles';
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
 import Grid from '@material-ui/core/Grid'
 import App from '../../App';
 import Link from 'react-router-dom/Link'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -53,9 +57,19 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
   },
+  fullWidth: {
+    width: "100%"
+  },
+  paddingless: {
+    padding: 0
+  }
 });
 
 class ResponsiveDrawer extends React.Component {
+componentDidMount(){
+
+}
+
   state = {
     mobileOpen: false,
   };
@@ -78,35 +92,78 @@ class ResponsiveDrawer extends React.Component {
         </div>
         
         <Divider />
-        <List>
-        <ListItem button component={Link} to="/">
+        <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading}>Groups</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.paddingless}>
+        <List className={classes.fullWidth}>
+          <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"Timesheets"} />
+            <ListItemText primary="New Group" />
           </ListItem>
           <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"Groups"} />
+            <ListItemText primary="Group 1" />
           </ListItem>
           <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"Events"} />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"Affiliates"} />
+            <ListItemText primary="Group 2" />
           </ListItem>
         </List>
-        <Divider />
-        <List>
-        <ListItem button>
+        </ExpansionPanelDetails>
+        </ExpansionPanel>
+        
+        <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography component={Link} to="/Admin" style={{textDecoration: "none", width: "100%"}}className={classes.heading}>Affiliates</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.paddingless}>
+        <List className={classes.fullWidth}>
+          <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"General Settings"} />
+            <ListItemText primary="New Affliliate" />
           </ListItem>
           <ListItem button>
             <ListItemIcon></ListItemIcon>
-            <ListItemText primary={"Theme Settings"} />
+            <ListItemText primary="Reports" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Affiliate 1" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Affiliate 2" />
           </ListItem>
         </List>
+        </ExpansionPanelDetails>
+        </ExpansionPanel>
+        <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography component={Link} to="/Dashboard" style={{textDecoration: "none", width: "100%"}}className={classes.heading}>Settings</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails className={classes.paddingless}>
+        <List className={classes.fullWidth}>
+          <ListItem button>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="General" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Affiliate" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Theme" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon></ListItemIcon>
+            <ListItemText primary="Admin" />
+          </ListItem>
+        </List>
+        </ExpansionPanelDetails>
+        </ExpansionPanel>
       </div>
     );
 

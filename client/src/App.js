@@ -33,7 +33,6 @@ export default class App extends Component {
             }/>
             <Route path="/Admin" component={MemberGrid}/>
             <Route path="/Dashboard" component={MemberGrid}/>
-            <Login />
       </BrowserRouter>
     );
   }
