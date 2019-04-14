@@ -104,7 +104,7 @@ router.put('/clockout',(req,res,next) => {
                 
                 const dif = session.timeIn.getTime() - session.timeOut.getTime();
                 const duration = Math.abs(dif/1000);
-                session.duration = duration*3600;//convert seconds to hours
+                session.duration = duration/3600;//convert seconds to hours
                 member.totalHours += session.duration; 
                 member.activeSession = null;
                 session.save();
