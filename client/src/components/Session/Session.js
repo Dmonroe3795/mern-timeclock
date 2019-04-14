@@ -33,9 +33,17 @@ class Member extends React.Component{
         this.setState(state => ({ open: !state.open }));
     };
 
+    getSessions = async() => {
+        const response = await fetch('/sessions', {
+            method: 'GET',
+          });
+        this.setState({members: await response.json()})
+        console.log(this.state.members);
+    }
+
     render(){
         const { classes, theme, children } = this.props;
-        const { name, totalHours, sessions } = this.props.member;
+        const { name, totalHours } = this.props.member;
         return(
             <div>
     
@@ -49,17 +57,14 @@ class Member extends React.Component{
                         {this.state.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                        { sessions.map( session => (
-                            <List component="div" disablePadding>
-                            <ListItem className={classes.inset} button>
-                                <ListItemIcon>
-                                    <HoursIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary={session} />
-                            </ListItem>
-                            </List>
-                        ))}
-                        
+                        <List component="div" disablePadding>
+                        <ListItem className={classes.inset} button>
+                            <ListItemIcon>
+                                <HoursIcon />
+                            </ListItemIcon>
+                            <ListItemText inset primary="Add" />
+                        </ListItem>
+                        </List>
                     </Collapse>
                 </List>
             </div>
