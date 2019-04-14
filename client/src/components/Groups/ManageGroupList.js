@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Group from './Group'
+import GroupPanel from './GroupPanel'
 
-export default class GroupMenuList extends Component {
+export default class ManageGroupList extends Component {
     state = {
         groups: []
     }
@@ -31,14 +31,11 @@ export default class GroupMenuList extends Component {
                             Groups:
                         </Typography>
                         </Grid>
-                        <Grid container spacing={24} style={{padding:24}}>
-                            { this.state.groups.map(currentGroup => (
-                                <Grid item xs={12}>
-                                    <Group group={currentGroup} />
-                                </Grid>
+
+
+                        { this.state.groups.map(currentGroup => (
+                            <GroupPanel key={currentGroup.id} group={currentGroup}/>
                             ))}
-                            {console.log(this.state.groups)}
-                        </Grid>
                     </div>
                 ) : "No groups found"}
 </div>
