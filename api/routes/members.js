@@ -91,14 +91,51 @@ router.delete('/:pId',(req, res, next) => {
         res.status(500).json({error: err});
     });
 });
-router.put('/:mId/:pId/clockin',(req,res,next) => {
-    const mId = req.params.mId;
-    const pId = req.params.pId;
+router.put('/clockout',(req,res,next) => {
+    const mId = req.body.mId;
+    const date = Date.now();
+    Member.findById(mId).exec()
+    .then(member => {
+        if(member){
+            Session.findById(member.activeSession).exec()
+            .then(session => {
+                if(session){
+                session.timeOut = date;
+                
+                const dif = session.timeIn.getTime() - session.timeOut.getTime();
+                const duration = Math.abs(dif/1000);
+                session.duration = duration*3600;//convert seconds to hours
+                member.totalHours += session.duration; 
+                member.activeSession = null;
+                session.save();
+                member.save();
+                res.status(200).json(session);
+            }else{res.status(404).json({message: "Session not found with that ID"})}
+            });
+            
+        }else{
+            res.status(404).json({message: "Member not found with that ID"})
+        }
+ 
+    })
+    .catch(err => {console.log(err)
+     res.status(500).json({error: err})
+     });
+ 
+
+});
+router.put('/clockin',(req,res,next) => {
+    const mId = req.body.mId;
+    const pId = req.body.pId;
+    const gId = req.body.gId;
+
     const date = Date.now();
 
     const session = new Session({
         _id: new mongoose.Types.ObjectId(),
         member: mId,
+        partner: pId,
+        group: gId,
         timeIn: date
     });
     session.save()
@@ -108,6 +145,7 @@ router.put('/:mId/:pId/clockin',(req,res,next) => {
                 return handleError(error);
               }
               member.sessions.push(result._id);
+              member.activeSession = session._id;
               member.save();
         })
         console.log(result);

@@ -6,7 +6,8 @@ const sessionSchema = mongoose.Schema({
     member:{type: mongoose.Schema.Types.ObjectId, ref: 'Member'},
     group: {type: mongoose.Schema.Types.ObjectId, ref: 'Group'},
     timeIn: Date,
-    timeOut: Date
+    timeOut: Date,
+    duration: Number
 });
 
 module.exports = mongoose.model('Session', sessionSchema);
