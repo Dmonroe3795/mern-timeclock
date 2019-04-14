@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 
 const memberRoutes = require('./api/routes/members');
 const orderRoutes = require('./api/routes/orders');
-const groupRoutes = require('./api/routes/groups')
+const groupRoutes = require('./api/routes/groups');
+const sessionRoutes = require('./api/routes/sessions');
 //test
 mongoose.connect('mongodb+srv://admin:'+ 
     process.env.MONGO_PW +
@@ -35,6 +36,7 @@ app.use((req,res,next) => {
 app.use('/members',memberRoutes);
 app.use('/orders', orderRoutes);
 app.use('/groups', groupRoutes);
+app.use('/sessions', sessionRoutes);
 
 app.use((req,res,next) => {
     const error = new Error('Not found');
