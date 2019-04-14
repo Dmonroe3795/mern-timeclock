@@ -2,28 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles} from '@material-ui/core/styles';
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
-import Grid from '@material-ui/core/Grid'
-import App from '../../App';
 import Link from 'react-router-dom/Link'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GroupMenuList from './GroupMenuList'
 import PartnerMenuList from './PartnerMenuList'
 import SettingsMenuList from './SettingsMenuList'
@@ -69,10 +57,6 @@ const styles = theme => ({
 });
 
 class ResponsiveDrawer extends React.Component {
-componentDidMount(){
-
-}
-
   state = {
     mobileOpen: false,
   };
@@ -88,7 +72,7 @@ componentDidMount(){
       <div>
         <div className={classes.toolbar}>
           <MenuList>
-            <MenuItem component={Link} to="/">
+            <MenuItem component={Link} to="/admin">
               Org Logo
             </MenuItem>
           </MenuList>

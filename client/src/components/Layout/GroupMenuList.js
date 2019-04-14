@@ -12,6 +12,7 @@ import AddGroupIcon from '@material-ui/icons/GroupAdd'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import ManageIcon from '@material-ui/icons/ListAlt'
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     inset: {
@@ -43,23 +44,23 @@ class GroupMenu extends React.Component{
                 </ListItem>
                 <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                    <ListItem className={classes.inset} button>
+                    <ListItem component={Link} to="/admin/groups/add" className={classes.inset} button>
                         <ListItemIcon>
                             <AddGroupIcon/>
                         </ListItemIcon>
                         <ListItemText inset primary="Add" />
                     </ListItem>
-                    <ListItem className={classes.inset} button>
+                    <ListItem component={Link} to="/admin/groups/manage" className={classes.inset} button>
                         <ListItemIcon>
                             <ManageIcon/>
                         </ListItemIcon>
                         <ListItemText inset primary="Manage" />
                     </ListItem>
-                    <ListItem className={classes.inset}  button>
+                    <ListItem component={Link} to="/admin/groups/reports" className={classes.inset}  button>
                         <ListItemIcon>
                             <TimelineIcon/>
                         </ListItemIcon>
-                        <ListItemText inset primary="Reports" />
+                        <ListItemText  inset primary="Reports" />
                     </ListItem>
                     </List>
                 </Collapse>

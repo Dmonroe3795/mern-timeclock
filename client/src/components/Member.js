@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const Member = (props) => {
+    console.log(props.member);
+
     return(
         <div>
                 <Card>

@@ -24,7 +24,7 @@ export default class MemberGrid extends Component {
 
     render() {
         return (
-            <ResponsiveDrawer>
+            <div>
                 {this.state.members ? (
                     <div> 
                         <Grid container direction='column' alignContent='center'>
@@ -42,7 +42,7 @@ export default class MemberGrid extends Component {
                         </Grid>
                     </div>
                 ) : "No members found"}
-            </ResponsiveDrawer>
+</div>
         )
     }
 }
