@@ -23,6 +23,20 @@ export default class RecentActivity extends Component {
         this.getSessions();
     }
 
+    loadData() {
+        fetch(`/sessions/${this.props.session}`)
+        .then(response => response.json())
+        .then(data => {
+        console.log(data);
+            this.setState({ session: data });
+        })
+        .catch(err => console.error(this.props.url, err.toString()))
+    }
+
+    componentDidMount() {
+        this.loadData()
+      }
+
     getSessions = async() => {
         const response = await fetch('/sessions', {
             method: 'GET',
@@ -47,8 +61,6 @@ export default class RecentActivity extends Component {
                             </List>
                             { this.state.sessions.map(session => (
                                 <Paper>
-
-
                                     <List component="nav" style={{marginTop: 10}}>
                                         <ListItem>
                                             <ListItemIcon>
@@ -64,7 +76,11 @@ export default class RecentActivity extends Component {
                                             <ListItemIcon>
                                                 <PartnerIcon />
                                             </ListItemIcon>
-                                            <ListItemText primary={`Partner: ${session.member}`} />
+                                            <ListItemText primary={
+                                                fetch(`/sessions/${session.partner}`)
+                                                .then(response => response.json()).then(partner => {partner})
+                                            } 
+                                            />
                                         </ListItem>
                                     </List>
                                 </Paper>
