@@ -39,7 +39,7 @@ app.use('/groups', groupRoutes);
 app.use('/sessions', sessionRoutes);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    res.sendFile(path.join(__dirname+'/client/index.html'));
   });
 
 app.use((req,res,next) => {
