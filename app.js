@@ -3,7 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const path = require('path');
 
 const memberRoutes = require('./api/routes/members');
 const orderRoutes = require('./api/routes/orders');
@@ -39,7 +39,7 @@ app.use('/groups', groupRoutes);
 app.use('/sessions', sessionRoutes);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/index.html'));
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
   });
 
 app.use((req,res,next) => {
