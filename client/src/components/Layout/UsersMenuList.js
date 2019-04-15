@@ -7,8 +7,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import GroupIcon from '@material-ui/icons/Group'
-import AddGroupIcon from '@material-ui/icons/GroupAdd'
+import PersonIcon from '@material-ui/icons/Person'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import ManageIcon from '@material-ui/icons/ListAlt'
 import { withStyles } from '@material-ui/core/styles';
@@ -21,10 +20,10 @@ const styles = theme => ({
     },
   });
 
-class GroupMenu extends React.Component{
+class UserMenu extends React.Component{
     state = {
         mobileOpen: false,
-        open:true
+        open:false
     };
 
     handleClick = () => {
@@ -38,32 +37,26 @@ class GroupMenu extends React.Component{
             <List component="nav">
                 <ListItem button onClick={this.handleClick}>
                     <ListItemIcon>
-                        <GroupIcon/>
+                        <PersonIcon/>
                     </ListItemIcon>
-                    <ListItemText inset primary="Groups" />
+                    <ListItemText inset primary="Users" />
                     {this.state.open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                    <ListItem component={Link} to="/admin/groups/add" button>
-                        <ListItemIcon className={classes.inset}>
-                            <AddGroupIcon/>
-                        </ListItemIcon>
-                        <ListItemText inset primary="Add" />
-                    </ListItem>
-                    <ListItem component={Link} to="/admin/groups/manage" button>
+                    <ListItem component={Link} to="/admin/users/manage" button>
                         <ListItemIcon className={classes.inset}>
                             <ManageIcon/>
                         </ListItemIcon>
                         <ListItemText inset primary="Manage" />
                     </ListItem>
-                    <ListItem component={Link} to="/admin/groups/reports"  button>
+                    <ListItem component={Link} to="/admin/users/reports"  button>
                         <ListItemIcon className={classes.inset}>
                             <TimelineIcon/>
                         </ListItemIcon>
                         <ListItemText  inset primary="Reports" />
                     </ListItem>
-                    <ListItem component={Link} to="/admin/groups/reports"  button>
+                    <ListItem component={Link} to="/admin/users/settings"  button>
                         <ListItemIcon className={classes.inset}>
                             <SettingsIcon/>
                         </ListItemIcon>
@@ -76,4 +69,4 @@ class GroupMenu extends React.Component{
     }
 }
 
-export default withStyles(styles)(GroupMenu);
+export default withStyles(styles)(UserMenu);

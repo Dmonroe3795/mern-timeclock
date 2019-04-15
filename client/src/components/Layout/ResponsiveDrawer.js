@@ -15,6 +15,7 @@ import Link from 'react-router-dom/Link'
 import GroupMenuList from './GroupMenuList'
 import PartnerMenuList from './PartnerMenuList'
 import SettingsMenuList from './SettingsMenuList'
+import UsersMenuList from './UsersMenuList'
 
 const drawerWidth = 240;
 
@@ -78,6 +79,7 @@ class ResponsiveDrawer extends React.Component {
           </MenuList>
         </div>
         <GroupMenuList />
+        <UsersMenuList />
         <PartnerMenuList />
         <SettingsMenuList />
       </div>

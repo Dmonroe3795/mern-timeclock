@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Grid from '@material-ui/core/Grid'
-import Member from '../components/Member'
+import Member from './Members/Member'
 import Typography from '@material-ui/core/Typography';
 import ResponsiveDrawer from './Layout/ResponsiveDrawer';
 

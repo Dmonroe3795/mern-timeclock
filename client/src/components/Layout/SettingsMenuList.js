@@ -9,7 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import GeneralIcon from '@material-ui/icons/Tune'
 import SettingsIcon from '@material-ui/icons/Settings'
 import ThemeIcon from '@material-ui/icons/Style'
-import AdminIcon from '@material-ui/icons/Security'
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -37,28 +36,22 @@ class PartnerMenu extends React.Component{
                     <ListItemIcon>
                         <SettingsIcon/>
                     </ListItemIcon>
-                    <ListItemText inset primary="Settings" />
+                    <ListItemText inset primary="Admin Settings" />
                     {this.state.open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItem className={classes.inset} button>
-                            <ListItemIcon>
+                        <ListItem button>
+                            <ListItemIcon className={classes.inset}>
                                 <GeneralIcon/>
                             </ListItemIcon>
                             <ListItemText inset primary="General" />
                         </ListItem>
-                        <ListItem className={classes.inset} button>
-                            <ListItemIcon>
+                        <ListItem button>
+                            <ListItemIcon className={classes.inset}>
                                 <ThemeIcon/>
                             </ListItemIcon>
                             <ListItemText inset primary="Theme" />
-                        </ListItem>
-                        <ListItem className={classes.inset} button>
-                            <ListItemIcon>
-                                <AdminIcon/>
-                            </ListItemIcon>
-                            <ListItemText inset primary="Admin" />
                         </ListItem>
                     </List>
                 </Collapse>

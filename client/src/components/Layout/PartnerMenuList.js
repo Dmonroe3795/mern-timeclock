@@ -11,6 +11,7 @@ import AddPartnerIcon from '@material-ui/icons/AddLocation'
 import TimelineIcon from '@material-ui/icons/Timeline'
 import ManageIcon from '@material-ui/icons/ListAlt'
 import { withStyles } from '@material-ui/core/styles';
+import SettingsIcon from '@material-ui/icons/Settings'
 
 const styles = theme => ({
     inset: {
@@ -42,23 +43,29 @@ class PartnerMenu extends React.Component{
                 </ListItem>
                 <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                    <ListItem className={classes.inset} button>
-                        <ListItemIcon>
+                    <ListItem button>
+                        <ListItemIcon className={classes.inset}>
                             <AddPartnerIcon/>
                         </ListItemIcon>
                         <ListItemText inset primary="Add Partner" />
                     </ListItem>
-                    <ListItem className={classes.inset} button>
-                        <ListItemIcon>
+                    <ListItem button>
+                        <ListItemIcon className={classes.inset}>
                             <ManageIcon/>
                         </ListItemIcon>
                         <ListItemText inset primary="Manage" />
                     </ListItem>
-                    <ListItem className={classes.inset}  button>
-                        <ListItemIcon>
+                    <ListItem  button>
+                        <ListItemIcon className={classes.inset}>
                             <TimelineIcon/>
                         </ListItemIcon>
                         <ListItemText inset primary="Reports" />
+                    </ListItem>
+                    <ListItem  button>
+                        <ListItemIcon className={classes.inset}>
+                            <SettingsIcon/>
+                        </ListItemIcon>
+                        <ListItemText inset primary="Settings" />
                     </ListItem>
                     </List>
                 </Collapse>
