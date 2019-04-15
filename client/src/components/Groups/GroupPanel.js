@@ -11,9 +11,17 @@ import Grid from '@material-ui/core/Grid'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider'
+import Divider from '@material-ui/core/Divider';
+import Collapse from '@material-ui/core/Collapse';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ExpandLess from '@material-ui/icons/ExpandMore';
+import ExpandMore from '@material-ui/icons/KeyboardArrowRight';
+import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
+    inset: {
+        marginLeft: 10
+      },
     root: {
       width: '100%',
     },
@@ -45,39 +53,48 @@ class GroupPanel extends React.Component {
         console.log(this.state.members);
     }
 
+    handleClick = () => {
+        this.setState(state => ({ open: !state.open }));
+    };
+
     render(){
 
         const { classes, group } = this.props;
         const { name } = group;
         console.log(classes)
         return(
-            <ExpansionPanel>
-                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography gutterBottom variant="headline" component="h2">{ name }</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails style={{paddingTop:0}}>
-                <Grid container >
-                <Grid item xs={12} >
-                <List component="nav">
-                
-                        <ListItem style={{paddingTop:0, paddingRight:50}}>
-                            <ListItemText primary="Name" />
-                            <ListItemText align="right" inset primary="Total Hours"/>
+<div>
+    <Grid container direction="column" alignItems="center" style={{width: "100%"}}>
+        <Grid item justify="center" style={{width: "100%", maxWidth: 1000}} >
+            <Paper style={{marginBottom: 10}}>
+            <List style={{padding: 0}} component="nav">
+                <ListItem  button onClick={this.handleClick}>
+                    <ListItemIcon>
+                    
+                    </ListItemIcon>
+                    <ListItemText inset primary={name} />
+                    <ListItemText align="right" inset primary={`${this.state.members.length} Members`}/>
+                    <ListItemIcon>
+                    
+                    </ListItemIcon>
+                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                    <List component="nav">
+                        <ListItem style={{paddingTop:0}} className="paddingless">
+                            <ListItemText primary="Partner" />
+                            <ListItemText align="right" inset primary="Duration"/>
                         </ListItem>
-                <Divider />
-                </List>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography>
+                    </List>
                     { this.state.members.map( member => (
                         <Member member={member} />
-                    ))}
-                    </Typography>
-                </Grid>
-                </Grid>
-                
-                </ExpansionPanelDetails> 
-            </ExpansionPanel>
+                    ))}        
+                </Collapse>
+            </List>
+            </Paper>
+        </Grid>
+    </Grid>
+</div>
         )
     }
 }
