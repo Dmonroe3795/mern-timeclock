@@ -38,6 +38,10 @@ app.use('/orders', orderRoutes);
 app.use('/groups', groupRoutes);
 app.use('/sessions', sessionRoutes);
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
+
 app.use((req,res,next) => {
     const error = new Error('Not found');
     error.status = 404;
