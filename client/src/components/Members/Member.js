@@ -15,7 +15,7 @@ import ExpandMore from '@material-ui/icons/KeyboardArrowRight';
 import { withStyles } from '@material-ui/core/styles';
 import PersonIcon from '@material-ui/icons/Person';
 import HoursIcon from '@material-ui/icons/Timer';
-import Session from './Session'
+import Session from './MemberSessionData'
 import TimerIcon from '@material-ui/icons/Timer'
 
 const styles = theme => ({

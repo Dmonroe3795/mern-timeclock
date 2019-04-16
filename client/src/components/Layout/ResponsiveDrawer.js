@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
 import Link from 'react-router-dom/Link'
@@ -16,6 +16,7 @@ import GroupMenuList from './GroupMenuList'
 import PartnerMenuList from './PartnerMenuList'
 import SettingsMenuList from './SettingsMenuList'
 import UsersMenuList from './UsersMenuList'
+import MetaTags from 'react-meta-tags'
 
 const drawerWidth = 240;
 
@@ -99,10 +100,10 @@ class ResponsiveDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <MenuList>
-            <MenuItem component={Link} to="/" style={{fontSize: 25, color: "white"}}>
-              Timeclock - Org Name
+              <MenuItem component={Link} to="/" style={{ fontSize: 25, color: "white" }}>
+                Timeclock - Org Name
             </MenuItem>
-          </MenuList>
+            </MenuList>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
@@ -134,7 +135,12 @@ class ResponsiveDrawer extends React.Component {
           </Hidden>
         </nav>
         <main className={classes.content}>
-          { children }
+          <MetaTags>
+            <title>ThymeCloq</title>
+            <meta id="meta-description" name="description" content="Some description." />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          </MetaTags>
+          {children}
         </main>
       </div>
     );

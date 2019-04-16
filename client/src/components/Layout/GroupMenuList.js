@@ -17,18 +17,19 @@ import SettingsIcon from '@material-ui/icons/Settings'
 
 const styles = theme => ({
     inset: {
-      marginLeft: 10
+        marginLeft: 10
     },
-  });
+});
 
-class GroupMenu extends React.Component{
+class GroupMenu extends React.Component {
     state = {
         mobileOpen: false,
-        open:true
+        open: true
     };
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
+
     };
 
     render() {
@@ -38,37 +39,37 @@ class GroupMenu extends React.Component{
             <List component="nav">
                 <ListItem button onClick={this.handleClick}>
                     <ListItemIcon>
-                        <GroupIcon/>
+                        <GroupIcon />
                     </ListItemIcon>
                     <ListItemText inset primary="Groups" />
                     {this.state.open ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                    <ListItem component={Link} to="/admin/groups/add" button>
-                        <ListItemIcon className={classes.inset}>
-                            <AddGroupIcon/>
-                        </ListItemIcon>
-                        <ListItemText inset primary="Add" />
-                    </ListItem>
-                    <ListItem component={Link} to="/admin/groups/manage" button>
-                        <ListItemIcon className={classes.inset}>
-                            <ManageIcon/>
-                        </ListItemIcon>
-                        <ListItemText inset primary="Manage" />
-                    </ListItem>
-                    <ListItem component={Link} to="/admin/groups/reports"  button>
-                        <ListItemIcon className={classes.inset}>
-                            <TimelineIcon/>
-                        </ListItemIcon>
-                        <ListItemText  inset primary="Reports" />
-                    </ListItem>
-                    <ListItem component={Link} to="/admin/groups/reports"  button>
-                        <ListItemIcon className={classes.inset}>
-                            <SettingsIcon/>
-                        </ListItemIcon>
-                        <ListItemText  inset primary="Settings" />
-                    </ListItem>
+                        <ListItem component={Link} to="/admin/groups/add" button>
+                            <ListItemIcon className={classes.inset}>
+                                <AddGroupIcon />
+                            </ListItemIcon>
+                            <ListItemText inset primary="Add" />
+                        </ListItem>
+                        <ListItem component={Link} to="/admin/groups/manage" button>
+                            <ListItemIcon className={classes.inset}>
+                                <ManageIcon />
+                            </ListItemIcon>
+                            <ListItemText inset primary="Manage" />
+                        </ListItem>
+                        <ListItem component={Link} to="/admin/groups/reports" button>
+                            <ListItemIcon className={classes.inset}>
+                                <TimelineIcon />
+                            </ListItemIcon>
+                            <ListItemText inset primary="Reports" />
+                        </ListItem>
+                        <ListItem component={Link} to="/admin/groups/reports" button>
+                            <ListItemIcon className={classes.inset}>
+                                <SettingsIcon />
+                            </ListItemIcon>
+                            <ListItemText inset primary="Settings" />
+                        </ListItem>
                     </List>
                 </Collapse>
             </List>
