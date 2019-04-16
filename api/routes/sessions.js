@@ -8,6 +8,8 @@ const Session = require('../models/session');
 //Get all Sessions
 router.get('/', (req, res, next) => {
     Session.find()
+    .populate('member','name')
+    .populate('group','name')
     .exec()
     .then(docs => {
         console.log(docs);
@@ -49,7 +51,10 @@ router.post('/', (req, res, next) => {
 //Get individual Session by ID
 router.get('/:sId',(req, res, next) => {
    const id = req.params.sId;
-   Session.findById(id).exec()
+   Session.findById(id)
+   .populate('member','name')
+   .populate('group','name')
+   .exec()
    .then(doc => {
        console.log(doc);
        if(doc){

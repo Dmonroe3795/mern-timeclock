@@ -7,6 +7,12 @@ const Member = require('../models/member');
 const Session = require('../models/session');
 router.get('/', (req, res, next) => {
     Member.find()
+    .populate({
+        path: 'activeSession',
+        populate:{
+            path: 'partner'
+        }
+    })
         .exec()
         .then(docs => {
             console.log(docs);
@@ -43,7 +49,14 @@ router.post('/', (req, res, next) => {
 
 router.get('/:pId', (req, res, next) => {
     const id = req.params.pId;
-    Member.findById(id).exec()
+    Member.findById(id)
+    .populate({
+        path: 'sessions',
+        populate:{
+            path: 'partner'
+        }
+    })
+    .exec()
         .then(doc => {
             console.log(doc);
             if (doc) {

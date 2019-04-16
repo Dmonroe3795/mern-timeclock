@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const path = require('path');
 
 const memberRoutes = require('./api/routes/members');
-const orderRoutes = require('./api/routes/orders');
 const groupRoutes = require('./api/routes/groups');
 const sessionRoutes = require('./api/routes/sessions');
 const partnerRoutes = require('./api/routes/partners');
@@ -38,7 +37,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/members', memberRoutes);
-app.use('/orders', orderRoutes);
 app.use('/groups', groupRoutes);
 app.use('/sessions', sessionRoutes);
 app.use('/partners', partnerRoutes);
