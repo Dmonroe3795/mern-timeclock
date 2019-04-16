@@ -7,7 +7,6 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -104,10 +103,7 @@ class ResponsiveDrawer extends React.Component {
           onOpen={this.toggleDrawer('left', true)}
         >
           <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer('left', false)}
-            onKeyDown={this.toggleDrawer('left', false)}
+
           >
             {drawer}
           </div>
