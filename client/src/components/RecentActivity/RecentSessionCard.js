@@ -20,7 +20,6 @@ export default class RecentSessionCard extends React.Component {
             .then(data => {
                 this.setState({ member: data.name });
             })
-            .then(console.log("HHHEERRRR" + this.state.member))
             .catch(err => console.error(this.props.url, err.toString()))
         // fetch(`/partners/${this.props.session.partner}`)
         //     .then(response => response.json())

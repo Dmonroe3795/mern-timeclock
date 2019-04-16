@@ -17,6 +17,7 @@ import PartnerMenuList from './PartnerMenuList'
 import SettingsMenuList from './SettingsMenuList'
 import UsersMenuList from './UsersMenuList'
 import MetaTags from 'react-meta-tags'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 
 const drawerWidth = 240;
 
@@ -61,10 +62,17 @@ const styles = theme => ({
 class ResponsiveDrawer extends React.Component {
   state = {
     mobileOpen: false,
+    left: false
   };
 
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+  };
+
+  toggleDrawer = (side, open) => () => {
+    this.setState({
+      [side]: open,
+    });
   };
 
   render() {
@@ -88,6 +96,24 @@ class ResponsiveDrawer extends React.Component {
 
     return (
       <div className={classes.root}>
+
+        <SwipeableDrawer
+          anchor="left"
+          open={this.state.left}
+          onClose={this.toggleDrawer('left', false)}
+          onOpen={this.toggleDrawer('left', true)}
+        >
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={this.toggleDrawer('left', false)}
+            onKeyDown={this.toggleDrawer('left', false)}
+          >
+            {drawer}
+          </div>
+        </SwipeableDrawer>
+
+
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
