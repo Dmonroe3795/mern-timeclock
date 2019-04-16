@@ -102,9 +102,7 @@ class ResponsiveDrawer extends React.Component {
           onClose={this.toggleDrawer('left', false)}
           onOpen={this.toggleDrawer('left', true)}
         >
-          <div
-
-          >
+          <div>
             {drawer}
           </div>
         </SwipeableDrawer>

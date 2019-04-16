@@ -27,13 +27,24 @@ const styles = theme => ({
 class Member extends React.Component {
 
     state = {
+        member: {},
         sessions: [],
         mobileOpen: false,
         open: false
     };
 
-    constructor() {
-        super();
+    loadData() {
+        fetch(`/members/${this.props.member}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ member: data })
+                this.setState({ sessions: data.sessions });
+            })
+            .catch(err => console.error(this.props.url, err.toString()))
+    }
+
+    componentDidMount() {
+        this.loadData()
     }
 
     handleClick = () => {
@@ -41,18 +52,17 @@ class Member extends React.Component {
     };
 
     render() {
-        const { classes, theme, children } = this.props;
-        const { name, totalHours, sessions } = this.props.member;
+        const { sessions } = this.props.member;
+
         return (
             <div>
-
                 <List component="nav">
                     <ListItem button onClick={this.handleClick}>
                         <ListItemIcon>
                             <PersonIcon />
                         </ListItemIcon>
-                        <ListItemText inset primary={name} />
-                        <ListItemText align="right" inset primary={totalHours} />
+                        <ListItemText inset primary={this.state.member.name} />
+                        <ListItemText align="right" inset primary={(Math.round(this.state.member.totalHours * 4) / 4).toFixed(2)} />
                         <ListItemIcon>
                             <TimerIcon />
                         </ListItemIcon>
@@ -65,7 +75,7 @@ class Member extends React.Component {
                                 <ListItemText align="right" inset primary="Duration" />
                             </ListItem>
                         </List>
-                        {sessions.map(session => (
+                        {this.state.sessions.map(session => (
                             <Session session={session} />
                         ))}
                     </Collapse>

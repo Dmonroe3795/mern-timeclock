@@ -1,4 +1,4 @@
-import React, {component} from 'react';
+import React, { component } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Member from '../Members/Member'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -21,86 +21,83 @@ import Paper from '@material-ui/core/Paper'
 const styles = theme => ({
     inset: {
         marginLeft: 10
-      },
+    },
     root: {
-      width: '100%',
+        width: '100%',
     },
     heading: {
-      fontSize: theme.typography.pxToRem(15),
-      fontWeight: theme.typography.fontWeightRegular,
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
     },
     paddingless: {
-        padding:0
+        padding: 0
     }
-  });
+});
 
 class GroupPanel extends React.Component {
 
     state = {
         members: []
     }
-    
-    constructor(){
+
+    constructor() {
         super();
         this.getMembers();
     }
-
-    getMembers = async() => {
+    getMembers = async () => {
         const response = await fetch('/members', {
             method: 'GET',
-          });
-        this.setState({members: await response.json()})
-        console.log(this.state.members);
+        });
+        this.setState({ members: await response.json() })
     }
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
     };
 
-    render(){
+    render() {
 
-        const { classes, group } = this.props;
+        const { group } = this.props;
         const { name } = group;
-        console.log(classes)
-        return(
-<div>
-    <Grid container direction="column" alignItems="center" style={{width: "100%"}}>
-        <Grid item justify="center" style={{width: "100%", maxWidth: 1000}} >
-            <Paper style={{marginBottom: 10}}>
-            <List style={{padding: 0}} component="nav">
-                <ListItem  button onClick={this.handleClick}>
-                    <ListItemIcon>
-                    
-                    </ListItemIcon>
-                    <ListItemText inset primary={name} />
-                    <ListItemText align="right" inset primary={`${this.state.members.length} Members`}/>
-                    <ListItemIcon>
-                    
-                    </ListItemIcon>
-                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                    <List component="nav">
-                        <ListItem style={{paddingTop:0}} className="paddingless">
-                            <ListItemText primary="Partner" />
-                            <ListItemText align="right" inset primary="Duration"/>
-                        </ListItem>
-                    </List>
-                    { this.state.members.map( member => (
-                        <Member member={member} />
-                    ))}        
-                </Collapse>
-            </List>
-            </Paper>
-        </Grid>
-    </Grid>
-</div>
+        return (
+            <div>
+                <Grid container direction="column" alignItems="center" style={{ width: "100%" }}>
+                    <Grid item justify="center" style={{ width: "100%", maxWidth: 1000 }} >
+                        <Paper style={{ marginBottom: 10 }}>
+                            <List style={{ padding: 0 }} component="nav">
+                                <ListItem button onClick={this.handleClick}>
+                                    <ListItemIcon>
+
+                                    </ListItemIcon>
+                                    <ListItemText inset primary={name} />
+                                    <ListItemText align="right" inset primary={`${this.props.group.members.length} Members`} />
+                                    <ListItemIcon>
+
+                                    </ListItemIcon>
+                                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                                </ListItem>
+                                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                                    <List component="nav">
+                                        <ListItem style={{ paddingBottom: 0 }}>
+                                            <ListItemText primary="Partner" />
+                                            <ListItemText align="right" primary="Total Hours" style={{ marginRight: 25 }} />
+                                        </ListItem>
+                                    </List>
+                                    {this.props.group.members.map(member => (
+                                        <Member member={member} />
+                                    ))}
+                                </Collapse>
+                            </List>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </div>
         )
     }
 }
 
 GroupPanel.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
-  
-  export default withStyles(styles)(GroupPanel);
+};
+
+export default withStyles(styles)(GroupPanel);

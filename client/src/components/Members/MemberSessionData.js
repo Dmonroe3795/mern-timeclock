@@ -1,4 +1,4 @@
-import React, {component} from 'react';
+import React, { component } from 'react';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent"
 import CardActions from '@material-ui/core/CardActions';
@@ -18,63 +18,70 @@ import HoursIcon from '@material-ui/icons/Timer'
 
 const styles = theme => ({
     inset: {
-      marginLeft: 10
+        marginLeft: 10
     },
-  });
+});
 
-class Member extends React.Component{
+class Member extends React.Component {
 
     state = {
         mobileOpen: false,
-        open:false,
-        session: []
+        open: false,
+        session: [],
+        partner: ""
     };
 
-    constructor(){
+    constructor() {
         super();
     }
 
     loadData() {
+        const session = {};
         fetch(`/sessions/${this.props.session}`)
-        .then(response => response.json())
-        .then(data => {
-        console.log(data);
-            this.setState({ session: data });
-        })
-        .catch(err => console.error(this.props.url, err.toString()))
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ session: data });
+                fetch(`http://localhost:3000/partners/${this.state.session.partner}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        this.setState({ partner: data.partner });
+                    })
+                    .catch(err => console.error(this.props.url, err.toString()))
+            })
     }
 
     componentDidMount() {
         this.loadData()
-      }
+    }
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
     };
 
-    render(){
-        const { classes, theme, children} = this.props;
-        const { timeIn, timeOut, partner, duration } = this.state.session;
-        return(
+    render() {
+        const { classes, theme, children } = this.props;
+        const { timeIn, timeOut, duration } = this.state.session;
+        return (
             <div>
-    
-    <List component="nav">
+
+                <List component="nav">
                     <ListItem button onClick={this.handleClick}>
                         <ListItemIcon>
                             <PersonIcon />
                         </ListItemIcon>
-                        <ListItemText inset primary={partner} />
-                        <ListItemText align="right" inset primary={`${duration} hrs`}/>
+                        <ListItemText inset primary={this.state.partner} />
+                        <ListItemText align="right" inset primary={`${duration} hrs`} />
                         {this.state.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                        <ListItem className={classes.inset} button>
-                            <ListItemIcon>
-                                <HoursIcon />
-                            </ListItemIcon>
-                            <ListItemText inset primary={`${timeIn}-${timeOut}`} />
-                        </ListItem>
+                            <ListItem className={classes.inset} button>
+                                <ListItemIcon>
+                                    <HoursIcon />
+                                </ListItemIcon>
+                                <ListItemText inset primary={`${timeIn}-${timeOut}`} />
+                            </ListItem>
                         </List>
                     </Collapse>
                 </List>
