@@ -41,7 +41,7 @@ class Member extends React.Component {
             .then(response => response.json())
             .then(data => {
                 this.setState({ session: data });
-                fetch(`http://localhost:3000/partners/${this.state.session.partner}`)
+                fetch(`/partners/${this.state.session.partner}`)
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
