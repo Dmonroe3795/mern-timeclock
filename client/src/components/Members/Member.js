@@ -1,4 +1,4 @@
-import React, {component} from 'react';
+import React, { component } from 'react';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent"
 import CardActions from '@material-ui/core/CardActions';
@@ -15,24 +15,24 @@ import ExpandMore from '@material-ui/icons/KeyboardArrowRight';
 import { withStyles } from '@material-ui/core/styles';
 import PersonIcon from '@material-ui/icons/Person';
 import HoursIcon from '@material-ui/icons/Timer';
-import Session from '../Session/Session'
+import Session from './Session'
 import TimerIcon from '@material-ui/icons/Timer'
 
 const styles = theme => ({
     inset: {
-      marginLeft: 10
+        marginLeft: 10
     },
-  });
+});
 
-class Member extends React.Component{
+class Member extends React.Component {
 
     state = {
         sessions: [],
         mobileOpen: false,
-        open:false
+        open: false
     };
 
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -40,36 +40,36 @@ class Member extends React.Component{
         this.setState(state => ({ open: !state.open }));
     };
 
-    render(){
+    render() {
         const { classes, theme, children } = this.props;
         const { name, totalHours, sessions } = this.props.member;
-        return(
+        return (
             <div>
-    
-    <List component="nav">
-        <ListItem button onClick={this.handleClick}>
-            <ListItemIcon>
-                <PersonIcon />
-            </ListItemIcon>
-            <ListItemText inset primary={name} />
-            <ListItemText align="right" inset primary={totalHours}/>
-            <ListItemIcon>
-                <TimerIcon />
-            </ListItemIcon>
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-        <List component="nav">
-            <ListItem style={{paddingTop:0}} className="paddingless">
-                <ListItemText primary="Partner" />
-                <ListItemText align="right" inset primary="Duration"/>
-            </ListItem>
-        </List>
-            { sessions.map( session => (
-                <Session session={session} />
-            ))}        
-        </Collapse>
-    </List>
+
+                <List component="nav">
+                    <ListItem button onClick={this.handleClick}>
+                        <ListItemIcon>
+                            <PersonIcon />
+                        </ListItemIcon>
+                        <ListItemText inset primary={name} />
+                        <ListItemText align="right" inset primary={totalHours} />
+                        <ListItemIcon>
+                            <TimerIcon />
+                        </ListItemIcon>
+                        {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                        <List component="nav">
+                            <ListItem style={{ paddingTop: 0 }} className="paddingless">
+                                <ListItemText primary="Partner" />
+                                <ListItemText align="right" inset primary="Duration" />
+                            </ListItem>
+                        </List>
+                        {sessions.map(session => (
+                            <Session session={session} />
+                        ))}
+                    </Collapse>
+                </List>
             </div>
         );
     }

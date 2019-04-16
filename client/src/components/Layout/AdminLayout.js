@@ -5,7 +5,7 @@ import GroupMenuList from './GroupMenuList';
 import AddGroupForm from '../Groups/AddGroupForm'
 import ManageGroupList from '../Groups/ManageGroupList';
 import GroupReports from '../Groups/GroupReports';
-import RecentActivity from '../RecentActivity';
+import RecentActivity from '../RecentActivity/RecentActivity';
 import ManageMembersList from '../Members/ManageMembersList'
 
 
