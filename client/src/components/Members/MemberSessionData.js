@@ -45,7 +45,7 @@ class Member extends React.Component {
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        this.setState({ partner: data.partner });
+                        this.setState({ partner: data.partner.name });
                     })
                     .catch(err => console.error(this.props.url, err.toString()))
             })
