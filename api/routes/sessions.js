@@ -91,7 +91,24 @@ router.patch('/:sId',(req, res, next) => {
         });
     });
 });
+//get all sessions for a specific partner
+router.get('/partner/:pId',(req, res, next) =>{
+    const id = req.params.pId;
 
+    Session.find({partner: id})
+    .populate('member','name')
+    .populate('group','name')
+    .exec()
+    .then(docs => {
+        console.log(docs);
+        res.status(200).json(docs);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+
+});
 router.delete('/:sId',(req, res, next) => {
     const id = req.params.sId;
 
