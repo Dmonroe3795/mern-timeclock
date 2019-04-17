@@ -163,11 +163,14 @@ router.put('/clockin', (req, res, next) => {
                 member.activeSession = session._id;
                 member.save();
             })
-            console.log(result);
-            res.status(201).json({
+            console.log("Here" + result);
+            result.populate({
+                path: 'partner',
+                select: 'name -_id'
+            }, _ => res.status(201).json({
                 message: 'handling post clockin',
                 createdSession: result
-            });
+            }));
         }).catch(err => {
             console.log(err);
             res.status(500).json({ error: err });
