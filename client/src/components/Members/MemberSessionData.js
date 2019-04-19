@@ -77,7 +77,7 @@ class Member extends React.Component {
                             <PartnerIcon />
                         </ListItemIcon>
                         <ListItemText inset primary={partner.name} />
-                        <ListItemText align="right" inset primary={`${duration} hrs`} />
+                        <ListItemText align="right" inset primary={`${duration.toFixed(2)} hrs`} />
                         {this.state.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>

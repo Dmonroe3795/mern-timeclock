@@ -71,19 +71,30 @@ class Member extends React.Component {
                     <ListItem>
                         <ListItemIcon style={{ paddingLeft: 5, cursor: 'pointer' }} onClick={this.handleClick}>
                             {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                            <PersonIcon />
                         </ListItemIcon>
                         <Tooltip title="Click to edit" placement="right">
                             <Typography onClick variant="subheading" className={this.props.classes.editable}>
                                     {this.state.member.name}
                             </Typography>
                         </Tooltip>
-                        <ListItemText align="right" inset primary={`${(Math.round(this.state.member.totalHours * 4) / 4).toFixed(2)} hrs`} />
-                        <ListItemIcon>
-                            <TimerIcon />
+                        <ListItemText />
+                        <ListItemIcon align="right">
+                            <PersonIcon />
                         </ListItemIcon>
                     </ListItem>
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                    <List>
+                        <ListItem>
+                            <ListItemText style={{paddingLeft: 50}}>
+                                Total Hours: 
+                                </ListItemText>
+                            <ListItemText align="right" inset primary={`${(Math.round(this.state.member.totalHours * 4) / 4).toFixed(2)}`} />
+                            <ListItemIcon>
+                                <TimerIcon />
+                            </ListItemIcon>
+                        </ListItem>
+                    </List>
+                    
                         {this.state.sessions.map(session => (
                             <Session session={session} />
                         ))}

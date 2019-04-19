@@ -104,7 +104,6 @@ constructor(props){
                                     <ListItem>
                                         <ListItemIcon style={{cursor: 'pointer' }} onClick={this.handleClick}>
                                             {this.state.open ? <ExpandLess />:<ExpandMore />}
-                                            <GroupIcon />
                                         </ListItemIcon>
                                         <InputBase
                                             multiline="true"
@@ -117,7 +116,10 @@ constructor(props){
                                                 <SaveIcon />
                                             </ListItemIcon>
                                         :null }
-                                        <ListItemText align="right" inset primary={`${this.props.group.members.length} Members`} />
+                                        <ListItemText align="right" inset primary={`${this.props.group.members.length}`} />
+                                        <ListItemIcon style={{cursor: 'pointer' }}>
+                                            <GroupIcon />
+                                        </ListItemIcon>
 
                                     </ListItem>
                                     <Divider />
@@ -134,8 +136,8 @@ constructor(props){
                             {this.state.show ? 
                                 <div>
                                      <Tooltip title="Archive" placement="bottom">
-                                        <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 5, paddingTop: 15}}>
-                                                <ArchiveIcon style={{cursor:'pointer'}} />
+                                        <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 7, paddingTop: 7}}>
+                                                <ArchiveIcon style={{cursor:'pointer', fontSize: 40}} />
                                         </ListItemIcon>
                                     </Tooltip>
                                 </div>
