@@ -24,7 +24,7 @@ var _colorManipulator = require("@material-ui/core/styles/colorManipulator");
 
 const styles = theme => ({
     editable :{
-        paddingLeft: 5,
+        paddingLeft: 5, 
         paddingRight: 5,
         '&:hover': {
              backgroundColor:(0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
@@ -72,12 +72,11 @@ constructor(props){
             name: this.props.group.name,
             exists: true,
             edited: false,
-            members: this.props.group.members
+            members: this.props.group.members,
+            focused: false
         }
-        console.log(this.state.members)
     }
     
-
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
     };
@@ -89,6 +88,12 @@ constructor(props){
 
     saveChanges = () =>{
         this.setState({edited: false});
+        this.switchBetweenTextBox();
+    }
+
+    switchBetweenTextBox = () =>{
+        this.setState({focused: !this.state.focused});
+        console.log(this.state.focused);
     }
 
     render() {
@@ -110,12 +115,22 @@ constructor(props){
                                         <ListItemIcon style={{cursor: 'pointer' }} onClick={this.handleClick}>
                                             {this.state.open ? <ExpandLess />:<ExpandMore />}
                                         </ListItemIcon>
+
+                                        {this.state.focused ? 
                                         <InputBase
                                             multiline="true"
                                             className={classes.margin, classes.editable}
                                             onChange={this.handleChange}
                                             onBlur={this.saveChanges}
                                             defaultValue={this.state.name} />
+                                        :
+                                        <Tooltip title="Double click to edit" placement="right" >
+                                            <Typography style={{paddingBottom: 4, paddingTop: 4}} onClick={this.switchBetweenTextBox} variant="subheading" className={this.props.classes.editable}>
+                                                    {this.state.name}
+                                            </Typography>
+                                        </Tooltip>
+                                        }
+
                                         {this.state.edited ? 
                                             <ListItemIcon style={{cursor: 'pointer' }}>
                                                 <SaveIcon />
@@ -128,7 +143,6 @@ constructor(props){
                                     </ListItem>
                                     <Divider />
                                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                                            {console.log(this.state.members)}
                                         {this.props.group.members.map(member => (
                                             <Member member={member} />
                                         ))}
