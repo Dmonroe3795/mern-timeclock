@@ -9,6 +9,7 @@ const memberRoutes = require('./api/routes/members');
 const groupRoutes = require('./api/routes/groups');
 const sessionRoutes = require('./api/routes/sessions');
 const partnerRoutes = require('./api/routes/partners');
+const qrRoutes = require('./api/routes/qr');
 //test
 mongoose.connect('mongodb+srv://admin:' +
     process.env.MONGO_PW +
@@ -40,6 +41,7 @@ app.use('/members', memberRoutes);
 app.use('/groups', groupRoutes);
 app.use('/sessions', sessionRoutes);
 app.use('/partners', partnerRoutes);
+app.use('/qr', qrRoutes)
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.

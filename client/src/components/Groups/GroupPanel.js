@@ -1,10 +1,5 @@
 import React, { component } from 'react';
-import Typography from '@material-ui/core/Typography';
 import Member from '../Members/Member'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
@@ -17,8 +12,25 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ExpandLess from '@material-ui/icons/ExpandMore';
 import ExpandMore from '@material-ui/icons/KeyboardArrowRight';
 import Paper from '@material-ui/core/Paper'
+import GroupIcon from '@material-ui/icons/Group'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+import InputBase from '@material-ui/core/InputBase'
+import SaveIcon from '@material-ui/icons/Save'
+
+var _colorManipulator = require("@material-ui/core/styles/colorManipulator");
 
 const styles = theme => ({
+    editable :{
+        paddingLeft: 5,
+        paddingRight: 5,
+        '&:hover': {
+             backgroundColor:(0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+             borderRadius: 4
+        }
+    },
     inset: {
         marginLeft: 10
     },
@@ -31,67 +43,106 @@ const styles = theme => ({
     },
     paddingless: {
         padding: 0
-    }
+    },
+    lightTooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: 'rgba(0, 0, 0, 0.87)',
+    boxShadow: theme.shadows[1],
+    fontSize: 11,
+  }
 });
 
 class GroupPanel extends React.Component {
 
     state = {
+        exists: true,
+        name: "",
+        edited: false,
         members: []
     }
 
-    constructor() {
-        super();
-        this.getMembers();
+constructor(props){
+        super(props)
+        this.state = {
+            name: this.props.group.name,
+            exists: true,
+            edited: false,
+            members: this.props.group.members
+        }
+        console.log(this.state.members)
     }
-    getMembers = async () => {
-        const response = await fetch('/members', {
-            method: 'GET',
-        });
-        this.setState({ members: await response.json() })
-    }
+    
 
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
     };
 
+    handleChange = event => {
+        this.setState({ name: event.target.value});
+        this.setState({edited: true});
+    };
+
+    saveChanges = () =>{
+        this.setState({edited: false});
+    }
+
     render() {
 
-        const { group } = this.props;
+        const { classes, group } = this.props;
         const { name } = group;
         return (
             <div>
-                <Grid container direction="column" alignItems="center" style={{ width: "100%" }}>
-                    <Grid item justify="center" style={{ width: "100%", maxWidth: 1000 }} >
-                        <Paper style={{ marginBottom: 10 }}>
-                            <List style={{ padding: 0 }} component="nav">
-                                <ListItem button onClick={this.handleClick}>
-                                    <ListItemIcon>
+                {this.state.exists ? 
+                    <Grid container alignItems="flex-start" style={{ width: "100%" }}
+                        onMouseEnter={() => this.setState({ show: true })}
+                        onMouseLeave={() => this.setState({ show: false })}
+                        >
+                        <Grid item xs justify="center" style={{ maxWidth: 1000 }}
+                        >
+                            <Paper style={{ marginBottom: 10 }}>
+                                <List style={{ padding: 0 }} component="nav">
+                                    <ListItem>
+                                        <ListItemIcon style={{cursor: 'pointer' }} onClick={this.handleClick}>
+                                            {this.state.open ? <ExpandLess />:<ExpandMore />}
+                                            <GroupIcon />
+                                        </ListItemIcon>
+                                        <InputBase
+                                            multiline="true"
+                                            className={classes.margin, classes.editable}
+                                            onChange={this.handleChange}
+                                            onBlur={this.saveChanges}
+                                            defaultValue={this.state.name} />
+                                        {this.state.edited ? 
+                                            <ListItemIcon style={{cursor: 'pointer' }}>
+                                                <SaveIcon />
+                                            </ListItemIcon>
+                                        :null }
+                                        <ListItemText align="right" inset primary={`${this.props.group.members.length} Members`} />
 
+                                    </ListItem>
+                                    <Divider />
+                                    <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                                            {console.log(this.state.members)}
+                                        {this.props.group.members.map(member => (
+                                            <Member member={member} />
+                                        ))}
+                                    </Collapse>
+                                </List>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={1} alignContent="top" >
+                            {this.state.show ? 
+                                <div>
+                                    <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 5, paddingTop: 15}}>
+                                            <DeleteIcon style={{cursor:'pointer'}} />
                                     </ListItemIcon>
-                                    <ListItemText inset primary={name} />
-                                    <ListItemText align="right" inset primary={`${this.props.group.members.length} Members`} />
-                                    <ListItemIcon>
-
-                                    </ListItemIcon>
-                                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                                </ListItem>
-                                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                                    <List component="nav">
-                                        <ListItem style={{ paddingBottom: 0 }}>
-                                            <ListItemText primary="Partner" />
-                                            <ListItemText align="right" primary="Total Hours" style={{ marginRight: 25 }} />
-                                        </ListItem>
-                                    </List>
-                                    {this.props.group.members.map(member => (
-                                        <Member member={member} />
-                                    ))}
-                                </Collapse>
-                            </List>
-                        </Paper>
+                                </div>
+                                : null}
+                        </Grid>
                     </Grid>
-                </Grid>
+                    : null}
             </div>
+            
         )
     }
 }

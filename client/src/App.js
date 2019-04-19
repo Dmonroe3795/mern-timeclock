@@ -11,6 +11,21 @@ WebFont.load({
   }
 });
 export default class App extends Component {
+
+  state = {
+    url: ""
+  }
+
+  componentDidMount(){
+    fetch(`http://localhost:3000/qr/`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ url: data.img })
+                console.log(data)
+            })
+            .catch(err => console.error(this.props.url, err.toString()))
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -26,6 +41,7 @@ export default class App extends Component {
                 Admin Dashboard
                 </Button>
             </Link>
+            <img style={{width: "50vw"}} src={this.state.url}/>
           </Grid>
         } />
         <Route path="/admin" component={AdminLayout} />

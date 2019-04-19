@@ -14,14 +14,25 @@ import ExpandLess from '@material-ui/icons/ExpandMore';
 import ExpandMore from '@material-ui/icons/KeyboardArrowRight';
 import { withStyles } from '@material-ui/core/styles';
 import PersonIcon from '@material-ui/icons/Person';
-import HoursIcon from '@material-ui/icons/Timer';
+import Divider from '@material-ui/core/Divider'
 import Session from './MemberSessionData'
 import TimerIcon from '@material-ui/icons/Timer'
+import Tooltip from '@material-ui/core/Tooltip'
+
+var _colorManipulator = require("@material-ui/core/styles/colorManipulator");
 
 const styles = theme => ({
     inset: {
         marginLeft: 10
     },
+    editable :{
+        paddingLeft: 5,
+        paddingRight: 5,
+        '&:hover': {
+             backgroundColor:(0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+             borderRadius: 4
+        }
+    }
 });
 
 class Member extends React.Component {
@@ -39,6 +50,7 @@ class Member extends React.Component {
             .then(data => {
                 this.setState({ member: data })
                 this.setState({ sessions: data.sessions });
+                console.log(this.state.member)
             })
             .catch(err => console.error(this.props.url, err.toString()))
     }
@@ -52,35 +64,33 @@ class Member extends React.Component {
     };
 
     render() {
-        const { sessions } = this.props.member;
 
         return (
             <div>
                 <List component="nav">
-                    <ListItem button onClick={this.handleClick}>
-                        <ListItemIcon>
+                    <ListItem>
+                        <ListItemIcon style={{ paddingLeft: 5, cursor: 'pointer' }} onClick={this.handleClick}>
+                            {this.state.open ? <ExpandLess /> : <ExpandMore />}
                             <PersonIcon />
                         </ListItemIcon>
-                        <ListItemText inset primary={this.state.member.name} />
-                        <ListItemText align="right" inset primary={(Math.round(this.state.member.totalHours * 4) / 4).toFixed(2)} />
+                        <Tooltip title="Click to edit" placement="right">
+                            <Typography onClick variant="subheading" className={this.props.classes.editable}>
+                                    {this.state.member.name}
+                            </Typography>
+                        </Tooltip>
+                        <ListItemText align="right" inset primary={`${(Math.round(this.state.member.totalHours * 4) / 4).toFixed(2)} hrs`} />
                         <ListItemIcon>
                             <TimerIcon />
                         </ListItemIcon>
-                        {this.state.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                        <List component="nav">
-                            <ListItem style={{ paddingTop: 0 }} className="paddingless">
-                                <ListItemText primary="Partner" />
-                                <ListItemText align="right" inset primary="Duration" />
-                            </ListItem>
-                        </List>
                         {this.state.sessions.map(session => (
                             <Session session={session} />
                         ))}
+                        <Divider />
                     </Collapse>
                 </List>
-            </div>
+            </div >
         );
     }
 }

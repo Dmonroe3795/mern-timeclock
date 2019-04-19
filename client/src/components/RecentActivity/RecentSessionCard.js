@@ -44,7 +44,7 @@ export default class RecentSessionCard extends React.Component {
                             <UserIcon />
                         </ListItemIcon>
                         <ListItemText primary={`${this.state.member}`} />
-                        <ListItemText align="right" inset primary={`${duration} hrs`} />
+                        <ListItemText align="right" inset primary={`${duration.toFixed(2)} hrs`} />
                         <ListItemIcon>
                             <DurationIcon />
                         </ListItemIcon>
