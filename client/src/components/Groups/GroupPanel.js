@@ -14,7 +14,7 @@ import ExpandMore from '@material-ui/icons/KeyboardArrowRight';
 import Paper from '@material-ui/core/Paper'
 import GroupIcon from '@material-ui/icons/Group'
 import EditIcon from '@material-ui/icons/Edit'
-import DeleteIcon from '@material-ui/icons/Delete'
+import ArchiveIcon from '@material-ui/icons/Archive'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import InputBase from '@material-ui/core/InputBase'
@@ -133,9 +133,11 @@ constructor(props){
                         <Grid item xs={1} alignContent="top" >
                             {this.state.show ? 
                                 <div>
-                                    <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 5, paddingTop: 15}}>
-                                            <DeleteIcon style={{cursor:'pointer'}} />
-                                    </ListItemIcon>
+                                     <Tooltip title="Archive" placement="bottom">
+                                        <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 5, paddingTop: 15}}>
+                                                <ArchiveIcon style={{cursor:'pointer'}} />
+                                        </ListItemIcon>
+                                    </Tooltip>
                                 </div>
                                 : null}
                         </Grid>
