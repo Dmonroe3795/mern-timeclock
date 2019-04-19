@@ -117,10 +117,9 @@ constructor(props){
                                             </ListItemIcon>
                                         :null }
                                         <ListItemText align="right" inset primary={`${this.props.group.members.length}`} />
-                                        <ListItemIcon style={{cursor: 'pointer' }}>
+                                        <ListItemIcon>
                                             <GroupIcon />
                                         </ListItemIcon>
-
                                     </ListItem>
                                     <Divider />
                                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
@@ -136,8 +135,8 @@ constructor(props){
                             {this.state.show ? 
                                 <div>
                                      <Tooltip title="Archive" placement="bottom">
-                                        <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 7, paddingTop: 7}}>
-                                                <ArchiveIcon style={{cursor:'pointer', fontSize: 40}} />
+                                        <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 12, paddingTop: 12}}>
+                                                <ArchiveIcon style={{cursor:'pointer', fontSize: 30}} />
                                         </ListItemIcon>
                                     </Tooltip>
                                 </div>
