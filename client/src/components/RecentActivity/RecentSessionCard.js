@@ -10,29 +10,31 @@ import DurationIcon from '@material-ui/icons/Timer'
 
 export default class RecentSessionCard extends React.Component {
 
-    state = {
-        member: ""
+    // state = {
+    //     member: ""
+    // }
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            member: props.session.member.name,
+            partner: props.session.partner.organization,
+            duration: props.session.duration
+        }
     }
 
-    loadData() {
-        fetch(`/members/${this.props.session.member}`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ member: data.name });
-            })
-            .catch(err => console.error(this.props.url, err.toString()))
-        // fetch(`/partners/${this.props.session.partner}`)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         this.setState({ session: data });
-        //     })
-        //     .catch(err => console.error(this.props.url, err.toString()))
-    }
+    // loadData() {
+    //     fetch(`/members/${this.props.session.member}`)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             this.setState({ member: data.name });
+    //         })
+    //         .catch(err => console.error(this.props.url, err.toString()))
+    // }
 
-    componentDidMount() {
-        this.loadData()
-    }
+    // componentDidMount() {
+    //     this.loadData()
+    // }
 
     render() {
         const { duration } = this.props.session;
@@ -53,7 +55,7 @@ export default class RecentSessionCard extends React.Component {
                         <ListItemIcon>
                             <PartnerIcon />
                         </ListItemIcon>
-                        <ListItemText primary={`Partner: ${this.state.member}`} />
+                        <ListItemText primary={`${this.state.partner}`} />
                     </ListItem>
                 </List>
             </Paper>

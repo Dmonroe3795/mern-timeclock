@@ -19,16 +19,17 @@ export default class RecentActivity extends Component {
         sessions: []
     }
 
-    constructor() {
-        super();
-        this.getSessions();
-    }
+    // constructor() {
+    //     super();
+    //     this.getSessions();
+    // }
 
     loadData() {
-        fetch(`/sessions/${this.props.session}`)
+        fetch(`/sessions/`)
             .then(response => response.json())
             .then(data => {
-                this.setState({ session: data });
+                this.setState({ sessions: data });
+                console.log(this.state.sessions)
             })
             .catch(err => console.error(this.props.url, err.toString()))
     }
@@ -37,12 +38,12 @@ export default class RecentActivity extends Component {
         this.loadData()
     }
 
-    getSessions = async () => {
-        const response = await fetch('/sessions', {
-            method: 'GET',
-        });
-        this.setState({ sessions: await response.json() })
-    }
+    // getSessions = async () => {
+    //     const response = await fetch('/sessions', {
+    //         method: 'GET',
+    //     });
+    //     this.setState({ sessions: await response.json() })
+    // }
 
     render() {
         return (
