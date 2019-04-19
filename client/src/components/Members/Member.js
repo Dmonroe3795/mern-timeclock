@@ -1,10 +1,5 @@
-import React, { component } from 'react';
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent"
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid'
 import Collapse from '@material-ui/core/Collapse'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -25,85 +20,75 @@ const styles = theme => ({
     inset: {
         marginLeft: 10
     },
-    editable :{
+    editable: {
         paddingLeft: 5,
         paddingRight: 5,
         '&:hover': {
-             backgroundColor:(0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
-             borderRadius: 4
+            backgroundColor: (0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+            borderRadius: 4
         }
     }
 });
 
-class Member extends React.Component {
+function Member({ url, memberID, classes }) {
+    const [member, setMember] = useState({})
+    const [sessions, setSessions] = useState([])
+    const [mobileOpen, setMobileOpen] = useState(false)
+    const [open, setOpen] = useState(false)
 
-    state = {
-        member: {},
-        sessions: [],
-        mobileOpen: false,
-        open: false
+    useEffect(() => {
+        async function fetchData() {
+            const res = await fetch(`/members/${memberID}`)
+            const data = await res.json()
+            await setMember(data)
+            await setSessions(data.sessions)
+            await console.log(member)
+            await console.log(sessions)
+        }
+        fetchData()
+    }, [])
+
+    function handleClick() {
+        setOpen(!open);
     };
 
-    loadData() {
-        fetch(`/members/${this.props.member}`)
-            .then(response => response.json())
-            .then(data => {
-                this.setState({ member: data })
-                this.setState({ sessions: data.sessions });
-                console.log(this.state.member)
-            })
-            .catch(err => console.error(this.props.url, err.toString()))
-    }
-
-    componentDidMount() {
-        this.loadData()
-    }
-
-    handleClick = () => {
-        this.setState(state => ({ open: !state.open }));
-    };
-
-    render() {
-
-        return (
-            <div>
-                <List component="nav">
-                    <ListItem>
-                        <ListItemIcon style={{ paddingLeft: 5, cursor: 'pointer' }} onClick={this.handleClick}>
-                            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-                        </ListItemIcon>
-                        <Tooltip title="Click to edit" placement="right">
-                            <Typography onClick variant="subheading" className={this.props.classes.editable}>
-                                    {this.state.member.name}
-                            </Typography>
-                        </Tooltip>
-                        <ListItemText />
-                        <ListItemIcon align="right">
-                            <PersonIcon />
-                        </ListItemIcon>
-                    </ListItem>
-                    <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+    return (
+        <div>
+            <List component="nav">
+                <ListItem>
+                    <ListItemIcon style={{ paddingLeft: 5, cursor: 'pointer' }} onClick={handleClick}>
+                        {open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemIcon>
+                    <Tooltip title="Click to edit" placement="right">
+                        <Typography onClick variant="subheading" className={classes.editable}>
+                            {member.name}
+                        </Typography>
+                    </Tooltip>
+                    <ListItemText />
+                    <ListItemIcon align="right">
+                        <PersonIcon />
+                    </ListItemIcon>
+                </ListItem>
+                <Collapse in={open} timeout="auto" unmountOnExit>
                     <List>
                         <ListItem>
-                            <ListItemText style={{paddingLeft: 50}}>
-                                Total Hours: 
+                            <ListItemText style={{ paddingLeft: 50 }}>
+                                Total Hours:
                                 </ListItemText>
-                            <ListItemText align="right" inset primary={`${(Math.round(this.state.member.totalHours * 4) / 4).toFixed(2)}`} />
+                            <ListItemText align="right" inset primary={`${(Math.round(member.totalHours * 4) / 4).toFixed(2)}`} />
                             <ListItemIcon>
                                 <TimerIcon />
                             </ListItemIcon>
                         </ListItem>
                     </List>
-                    
-                        {this.state.sessions.map(session => (
-                            <Session session={session} />
-                        ))}
-                        <Divider />
-                    </Collapse>
-                </List>
-            </div >
-        );
-    }
+                    {sessions.map(session => (
+                        <Session session={session} />
+                    ))}
+                    <Divider />
+                </Collapse>
+            </List>
+        </div >
+    );
 }
 
 export default withStyles(styles)(Member);

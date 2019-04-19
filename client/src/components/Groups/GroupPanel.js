@@ -23,12 +23,12 @@ import SaveIcon from '@material-ui/icons/Save'
 var _colorManipulator = require("@material-ui/core/styles/colorManipulator");
 
 const styles = theme => ({
-    editable :{
-        paddingLeft: 5, 
+    editable: {
+        paddingLeft: 5,
         paddingRight: 5,
         '&:hover': {
-             backgroundColor:(0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
-             borderRadius: 4
+            backgroundColor: (0, _colorManipulator.fade)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+            borderRadius: 4
         }
     },
     inset: {
@@ -45,16 +45,16 @@ const styles = theme => ({
         padding: 0
     },
     lightTooltip: {
-    backgroundColor: theme.palette.common.white,
-    color: 'rgba(0, 0, 0, 0.87)',
-    boxShadow: theme.shadows[1],
-    fontSize: 11,
-  },
-  shadowed: {
-      '&:hover': {
-             boxShadow: theme.shadows[3]
+        backgroundColor: theme.palette.common.white,
+        color: 'rgba(0, 0, 0, 0.87)',
+        boxShadow: theme.shadows[1],
+        fontSize: 11,
+    },
+    shadowed: {
+        '&:hover': {
+            boxShadow: theme.shadows[3]
         }
-  }
+    }
 });
 
 class GroupPanel extends React.Component {
@@ -66,7 +66,7 @@ class GroupPanel extends React.Component {
         members: []
     }
 
-constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             name: this.props.group.name,
@@ -76,23 +76,23 @@ constructor(props){
             focused: false
         }
     }
-    
+
     handleClick = () => {
         this.setState(state => ({ open: !state.open }));
     };
 
     handleChange = event => {
-        this.setState({ name: event.target.value});
-        this.setState({edited: true});
+        this.setState({ name: event.target.value });
+        this.setState({ edited: true });
     };
 
-    saveChanges = () =>{
-        this.setState({edited: false});
+    saveChanges = () => {
+        this.setState({ edited: false });
         this.switchBetweenTextBox();
     }
 
-    switchBetweenTextBox = () =>{
-        this.setState({focused: !this.state.focused});
+    switchBetweenTextBox = () => {
+        this.setState({ focused: !this.state.focused });
         console.log(this.state.focused);
     }
 
@@ -102,40 +102,40 @@ constructor(props){
         const { name } = group;
         return (
             <div>
-                {this.state.exists ? 
+                {this.state.exists ?
                     <Grid container alignItems="flex-start" style={{ width: "100%" }}
                         onMouseEnter={() => this.setState({ show: true })}
                         onMouseLeave={() => this.setState({ show: false })}
-                        >
+                    >
                         <Grid item xs justify="center" style={{ maxWidth: 1000 }}
                         >
-                            <Paper className={ classes.shadowed } style={{ marginBottom: 10 }}>
+                            <Paper className={classes.shadowed} style={{ marginBottom: 10 }}>
                                 <List style={{ padding: 0 }} component="nav">
                                     <ListItem>
-                                        <ListItemIcon style={{cursor: 'pointer' }} onClick={this.handleClick}>
-                                            {this.state.open ? <ExpandLess />:<ExpandMore />}
+                                        <ListItemIcon style={{ cursor: 'pointer' }} onClick={this.handleClick}>
+                                            {this.state.open ? <ExpandLess /> : <ExpandMore />}
                                         </ListItemIcon>
 
-                                        {this.state.focused ? 
-                                        <InputBase
-                                            multiline="true"
-                                            className={classes.margin, classes.editable}
+                                        {this.state.focused ?
+                                            <InputBase
+                                                multiline="true"
+                                                className={classes.margin, classes.editable}
                                             onChange={this.handleChange}
-                                            onBlur={this.saveChanges}
-                                            defaultValue={this.state.name} />
-                                        :
+                                        onBlur={this.saveChanges}
+                                        defaultValue={this.state.name} />
+                                    :
                                         <Tooltip title="Double click to edit" placement="right" >
-                                            <Typography style={{paddingBottom: 4, paddingTop: 4}} onClick={this.switchBetweenTextBox} variant="subheading" className={this.props.classes.editable}>
-                                                    {this.state.name}
+                                            <Typography style={{ paddingBottom: 4, paddingTop: 4 }} onClick={this.switchBetweenTextBox} variant="subheading" className={this.props.classes.editable}>
+                                                {this.state.name}
                                             </Typography>
                                         </Tooltip>
                                         }
 
-                                        {this.state.edited ? 
-                                            <ListItemIcon style={{cursor: 'pointer' }}>
+                                        {this.state.edited ?
+                                            <ListItemIcon style={{ cursor: 'pointer' }}>
                                                 <SaveIcon />
                                             </ListItemIcon>
-                                        :null }
+                                            : null}
                                         <ListItemText align="right" inset primary={`${this.props.group.members.length}`} />
                                         <ListItemIcon>
                                             <GroupIcon />
@@ -144,18 +144,18 @@ constructor(props){
                                     <Divider />
                                     <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                                         {this.props.group.members.map(member => (
-                                            <Member member={member} />
+                                            <Member memberID={member} />
                                         ))}
                                     </Collapse>
                                 </List>
                             </Paper>
                         </Grid>
                         <Grid item xs={1} alignContent="top" >
-                            {this.state.show ? 
+                            {this.state.show ?
                                 <div>
-                                     <Tooltip title="Archive" placement="right">
-                                        <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 12, paddingTop: 12}}>
-                                                <ArchiveIcon style={{cursor:'pointer', fontSize: 30}} />
+                                    <Tooltip title="Archive" placement="right">
+                                        <ListItemIcon onClick={() => this.setState({ exists: false })} style={{ paddingLeft: 12, paddingTop: 12 }}>
+                                            <ArchiveIcon style={{ cursor: 'pointer', fontSize: 30 }} />
                                         </ListItemIcon>
                                     </Tooltip>
                                 </div>
@@ -164,7 +164,7 @@ constructor(props){
                     </Grid>
                     : null}
             </div>
-            
+
         )
     }
 }
