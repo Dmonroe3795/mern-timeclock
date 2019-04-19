@@ -17,7 +17,7 @@ export default class App extends Component {
   }
 
   componentDidMount(){
-    fetch(`http://localhost:3000/qr/`)
+    fetch(`/qr/`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ url: data.img })
