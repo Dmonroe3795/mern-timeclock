@@ -49,6 +49,11 @@ const styles = theme => ({
     color: 'rgba(0, 0, 0, 0.87)',
     boxShadow: theme.shadows[1],
     fontSize: 11,
+  },
+  shadowed: {
+      '&:hover': {
+             boxShadow: theme.shadows[3]
+        }
   }
 });
 
@@ -99,7 +104,7 @@ constructor(props){
                         >
                         <Grid item xs justify="center" style={{ maxWidth: 1000 }}
                         >
-                            <Paper style={{ marginBottom: 10 }}>
+                            <Paper className={ classes.shadowed } style={{ marginBottom: 10 }}>
                                 <List style={{ padding: 0 }} component="nav">
                                     <ListItem>
                                         <ListItemIcon style={{cursor: 'pointer' }} onClick={this.handleClick}>
@@ -134,7 +139,7 @@ constructor(props){
                         <Grid item xs={1} alignContent="top" >
                             {this.state.show ? 
                                 <div>
-                                     <Tooltip title="Archive" placement="bottom">
+                                     <Tooltip title="Archive" placement="right">
                                         <ListItemIcon onClick={() => this.setState({exists: false})} style={{ paddingLeft: 12, paddingTop: 12}}>
                                                 <ArchiveIcon style={{cursor:'pointer', fontSize: 30}} />
                                         </ListItemIcon>
