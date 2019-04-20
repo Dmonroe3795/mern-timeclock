@@ -90,7 +90,7 @@ router.patch("/:pId", (req, res, next) => {
 
 router.delete("/:pId", (req, res, next) => {
   const id = req.params.pId;
-  Group.remove({ _id: id })
+  Group.remove({ name: "Test Group" })
     .exec()
     .then(result => {
       result.status(200).json(result);

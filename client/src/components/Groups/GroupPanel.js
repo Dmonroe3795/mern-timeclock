@@ -100,8 +100,14 @@ class GroupPanel extends React.Component {
   };
 
   handleChange = event => {
+    console.log(event.key);
     this.setState({ name: event.target.value });
     this.setState({ edited: true });
+    if (event.key == "Enter") {
+      this.switchBetweenTextBox();
+      this.saveChanges();
+    }
+    //this.unfocusOnEnter();
   };
 
   saveChanges = () => {
@@ -119,7 +125,6 @@ class GroupPanel extends React.Component {
 
   switchBetweenTextBox = () => {
     this.setState({ focused: !this.state.focused });
-    console.log(this.state.focused);
   };
 
   archiveGroup = () => {
@@ -160,9 +165,10 @@ class GroupPanel extends React.Component {
 
                     {this.state.focused ? (
                       <InputBase
-                        multiline="true"
+                        //multiline="true"
                         className={(classes.margin, classes.editable)}
-                        onChange={this.handleChange}
+                        onKeyDown={this.handleChange}
+                        //onChange={this.handleChange}
                         onBlur={this.saveChanges}
                         defaultValue={this.state.name}
                       />
