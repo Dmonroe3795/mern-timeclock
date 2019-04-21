@@ -81,15 +81,12 @@ class ResponsiveDrawer extends React.Component {
       <div>
         <div className={classes.toolbar}>
           <MenuList>
-            <MenuItem component={Link} to="/admin">
-              Org Logo
+            <MenuItem component={Link} to="/admin" style = {{height:"100%"}}>
+              {this.props.orgLogo}
             </MenuItem>
           </MenuList>
         </div>
-        <GroupMenuList />
-        <UsersMenuList />
-        <PartnerMenuList />
-        <SettingsMenuList />
+        {this.props.contents}
       </div>
     );
 
@@ -121,7 +118,7 @@ class ResponsiveDrawer extends React.Component {
             </IconButton>
             <MenuList>
               <MenuItem component={Link} to="/" style={{ fontSize: 25, color: "white" }}>
-                Timeclock - Org Name
+                ThymeCloq - {this.props.title}
             </MenuItem>
             </MenuList>
           </Toolbar>

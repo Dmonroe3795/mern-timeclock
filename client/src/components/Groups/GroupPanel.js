@@ -99,7 +99,9 @@ class GroupPanel extends React.Component {
     console.log(this.props.group.members);
     console.log(this.props.group.name);
   }
-
+  handleClick = () => {
+    this.setState(state => ({ open: !state.open }));
+  };
   saveChanges = value => {
     this.setState({ edited: false });
     fetch(`/groups/${this.props.group._id}`, {
