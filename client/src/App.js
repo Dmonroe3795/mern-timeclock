@@ -5,6 +5,8 @@ import AdminLayout from "./components/Layout/AdminLayout";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import "./App.css";
 import Button from "@material-ui/core/Button";
+import MemberLayout from "./components/Layout/MemberLayout";
+import ClockIn from "./components/Member/ClockIn";
 WebFont.load({
   google: {
     families: ["Roboto"]
@@ -73,7 +75,7 @@ export default class App extends Component {
           )}
         />
         <Route path="/admin" component={AdminLayout} />
-        <Route path="/Dashboard" component={AdminLayout} />
+        <Route path="/Dashboard" component={ClockIn} />
       </BrowserRouter>
     );
   }
