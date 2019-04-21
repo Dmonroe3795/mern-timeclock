@@ -17,12 +17,17 @@ import ExpandLess from "@material-ui/icons/ExpandMore";
 import ExpandMore from "@material-ui/icons/KeyboardArrowRight";
 import Paper from "@material-ui/core/Paper";
 import GroupIcon from "@material-ui/icons/Group";
-import EditIcon from "@material-ui/icons/Edit";
 import ArchiveIcon from "@material-ui/icons/Archive";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import SaveIcon from "@material-ui/icons/Save";
+import FetchingInput from "../FetchingInput";
+
+const handleFocus = event => event.target.select();
+const Input = props => (
+  <input type="text" value="Some something" onFocus={handleFocus} />
+);
 
 var _colorManipulator = require("@material-ui/core/styles/colorManipulator");
 
@@ -95,36 +100,16 @@ class GroupPanel extends React.Component {
     console.log(this.props.group.name);
   }
 
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
-  };
-
-  handleChange = event => {
-    console.log(event.key);
-    this.setState({ name: event.target.value });
-    this.setState({ edited: true });
-    if (event.key == "Enter") {
-      this.switchBetweenTextBox();
-      this.saveChanges();
-    }
-    //this.unfocusOnEnter();
-  };
-
-  saveChanges = () => {
+  saveChanges = value => {
     this.setState({ edited: false });
-    this.switchBetweenTextBox();
     fetch(`/groups/${this.props.group._id}`, {
       method: "PATCH", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json"
         // "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify([{ propName: "name", value: this.state.name }]) // body data type must match "Content-Type" header
+      body: JSON.stringify([{ propName: "name", value: value }]) // body data type must match "Content-Type" header
     }).then(response => response.json()); // parses JSON response into native Javascript objects
-  };
-
-  switchBetweenTextBox = () => {
-    this.setState({ focused: !this.state.focused });
   };
 
   archiveGroup = () => {
@@ -163,33 +148,11 @@ class GroupPanel extends React.Component {
                       {this.state.open ? <ExpandLess /> : <ExpandMore />}
                     </ListItemIcon>
 
-                    {this.state.focused ? (
-                      <InputBase
-                        //multiline="true"
-                        className={(classes.margin, classes.editable)}
-                        onKeyDown={this.handleChange}
-                        //onChange={this.handleChange}
-                        onBlur={this.saveChanges}
-                        defaultValue={this.state.name}
-                      />
-                    ) : (
-                      <Tooltip title="Double click to edit" placement="right">
-                        <Typography
-                          style={{ paddingBottom: 4, paddingTop: 4 }}
-                          onClick={this.switchBetweenTextBox}
-                          variant="subheading"
-                          className={this.props.classes.editable}
-                        >
-                          {this.state.name}
-                        </Typography>
-                      </Tooltip>
-                    )}
+                    <FetchingInput
+                      initialValue={this.state.name}
+                      apiCall={this.saveChanges}
+                    />
 
-                    {this.state.edited ? (
-                      <ListItemIcon style={{ cursor: "pointer" }}>
-                        <SaveIcon />
-                      </ListItemIcon>
-                    ) : null}
                     <ListItemText
                       align="right"
                       inset

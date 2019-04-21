@@ -33,7 +33,7 @@ const styles = theme => ({
   }
 });
 
-function Member({ url, memberID, classes }) {
+function Member({ memberID, classes }) {
   const [member, setMember] = useState({});
   const [sessions, setSessions] = useState([]);
   const [mobileOpen, setMobileOpen] = useState(false);
