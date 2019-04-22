@@ -27,8 +27,10 @@ export default class AdminLayout extends React.Component {
               <SettingsMenuList />
             </div>
           }
-          thymeLogo={<ResponsiveImage src={Thyme} />}
-          orgLogo={<ResponsiveImage src={Thyme} />}
+          thymeLogo={
+            <img src={Thyme} style={{ width: "100%", maxWidth: 100 }} />
+          }
+          orgLogo={<img src={Thyme} style={{ maxWidth: 200 }} />}
         >
           <Switch>
             <Route exact path="/admin" component={RecentActivity} />

@@ -104,9 +104,7 @@ class ResponsiveDrawer extends React.Component {
           style={{
             position: "absolute",
             left: 0,
-            bottom: 10,
-            paddingLeft: 50,
-            paddingRight: 50
+            bottom: 10
           }}
         >
           {this.props.thymeLogo}
