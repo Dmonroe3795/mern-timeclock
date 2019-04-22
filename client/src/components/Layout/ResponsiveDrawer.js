@@ -99,15 +99,22 @@ class ResponsiveDrawer extends React.Component {
             </MenuItem>
           </MenuList>
         </div>
-        {this.props.contents}
+        <div style={{ paddingBottom: 60 }}>{this.props.contents}</div>
         <div
           style={{
             position: "absolute",
             left: 0,
-            bottom: 10
+            bottom: 10,
+            paddingLeft: 50,
+            paddingRight: 50,
+            backgroundColor: "#fff"
           }}
         >
-          {this.props.thymeLogo}
+          <MenuList>
+            <MenuItem component={Link} to="/admin" style={{ height: "100%" }}>
+              {this.props.thymeLogo}
+            </MenuItem>
+          </MenuList>
         </div>
       </div>
     );
@@ -124,7 +131,15 @@ class ResponsiveDrawer extends React.Component {
         </SwipeableDrawer>
 
         <CssBaseline />
-        <AppBar color="secondary" position="fixed" className={classes.appBar}>
+        <AppBar
+          color="secondary"
+          position="fixed"
+          className={classes.appBar}
+          style={{
+            backgroundColor: "#fff",
+            borderBottom: `4px solid ${theme.palette.primary.main}`
+          }}
+        >
           <Grid justify="space-between" container style={{ width: "100%" }}>
             <Grid item xs={3}>
               <Toolbar>
