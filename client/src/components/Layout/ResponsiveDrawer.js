@@ -132,7 +132,7 @@ class ResponsiveDrawer extends React.Component {
 
         <CssBaseline />
         <AppBar
-          color="secondary"
+          color="primary"
           position="fixed"
           className={classes.appBar}
           style={{
