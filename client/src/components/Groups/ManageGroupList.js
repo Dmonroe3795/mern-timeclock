@@ -15,7 +15,8 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       right: theme.spacing.unit * 5,
       left: "auto"
-    }
+    },
+    color: "#fff"
   }
 });
 
@@ -103,7 +104,7 @@ class ManageGroupList extends Component {
           className={classes.tooltip}
         >
           <Fab
-            color="primary"
+            color="secondary"
             aria-label="Add"
             className={classes.fab}
             onClick={this.addGroup}

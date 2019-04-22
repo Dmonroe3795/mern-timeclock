@@ -31,17 +31,7 @@ const Input = props => (
 
 var _colorManipulator = require("@material-ui/core/styles/colorManipulator");
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiTooltip: {
-      tooltip: {
-        fontSize: ".8em"
-      }
-    }
-  }
-});
-
-const styles = {
+const styles = theme => ({
   editable: {
     paddingLeft: 5,
     paddingRight: 5,
@@ -77,7 +67,7 @@ const styles = {
       boxShadow: theme.shadows[3]
     }
   }
-};
+});
 
 class GroupPanel extends React.Component {
   state = {
@@ -127,7 +117,7 @@ class GroupPanel extends React.Component {
   };
 
   render() {
-    const { classes, group } = this.props;
+    const { classes, group, theme } = this.props;
     const { name } = group;
     return (
       <MuiThemeProvider theme={theme}>
