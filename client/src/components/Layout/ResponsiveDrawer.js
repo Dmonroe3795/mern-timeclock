@@ -137,7 +137,7 @@ class ResponsiveDrawer extends React.Component {
           className={classes.appBar}
           style={{
             backgroundColor: "#fff",
-            borderBottom: `4px solid ${theme.palette.primary.main}`
+            borderBottom: `4px solid ${theme.palette.secondary.main}`
           }}
         >
           <Grid justify="space-between" container style={{ width: "100%" }}>
