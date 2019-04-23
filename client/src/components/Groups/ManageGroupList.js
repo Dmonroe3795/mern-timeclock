@@ -6,17 +6,20 @@ import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import Tooltip from "@material-ui/core/Tooltip";
 import GroupList from "./GroupList";
+import Typography from "@material-ui/core/Typography";
+import MenuList from "@material-ui/core/MenuList";
+import MenuItem from "@material-ui/core/MenuItem";
+import ManageContentHeader from "../ManageContentHeader";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   fab: {
-    position: "absolute",
-    bottom: theme.spacing.unit * 5,
-    left: theme.spacing.unit * 32,
-    [theme.breakpoints.down("xs")]: {
-      right: theme.spacing.unit * 5,
-      left: "auto"
-    },
     color: "#fff"
+  },
+  mainContent: {
+    width: "100%",
+    marginTop: 60,
+    maxWidth: 1000
   }
 });
 
@@ -79,6 +82,16 @@ class ManageGroupList extends Component {
                 justify="center"
                 style={{ width: "100%", marginTop: 60, maxWidth: 1000 }}
               >
+                <Grid
+                  alignItems="center"
+                  style={{ width: "93%", marginBottom: 20 }}
+                  container
+                >
+                  <ManageContentHeader
+                    title="Group"
+                    addFunction={this.addGroup}
+                  />
+                </Grid>
                 <GroupList groups={this.state.groups} />
               </Grid>
             </Grid>
@@ -97,21 +110,6 @@ class ManageGroupList extends Component {
             <Grid item>No Groups Found :(</Grid>
           </Grid>
         )}
-
-        <Tooltip
-          title="Add Group"
-          placement="right"
-          className={classes.tooltip}
-        >
-          <Fab
-            color="secondary"
-            aria-label="Add"
-            className={classes.fab}
-            onClick={this.addGroup}
-          >
-            <AddIcon />
-          </Fab>
-        </Tooltip>
       </div>
     );
   }

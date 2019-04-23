@@ -39,6 +39,7 @@ const styles = theme => ({
     }
   },
   menuButton: {
+    marginTop: 10,
     marginRight: 20,
     [theme.breakpoints.up("sm")]: {
       display: "none"
@@ -140,7 +141,12 @@ class ResponsiveDrawer extends React.Component {
             borderBottom: `4px solid ${theme.palette.secondary.main}`
           }}
         >
-          <Grid justify="space-between" container style={{ width: "100%" }}>
+          <Grid
+            justify="space-between"
+            alignContent="center"
+            container
+            style={{ width: "100%" }}
+          >
             <Grid item xs={3}>
               <Toolbar>
                 <IconButton
@@ -156,8 +162,8 @@ class ResponsiveDrawer extends React.Component {
                     className={classes.hideOnMobile}
                     style={{ height: "100% padding: 0" }}
                   >
-                    <Typography variant="h4">
-                      {this.props.title}Page Title
+                    <Typography color="secondary" variant="h4">
+                      Admin Dashboard
                     </Typography>
                   </MenuItem>
                 </MenuList>
