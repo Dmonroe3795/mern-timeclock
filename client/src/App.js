@@ -5,10 +5,11 @@ import AdminLayout from "./components/Layout/AdminLayout";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import "./App.css";
 import Button from "@material-ui/core/Button";
+import TimeClockManager from "./components/Member/TimeClockManager"
 import MemberLayout from "./components/Layout/MemberLayout";
-import ClockIn from "./components/Member/ClockIn";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
+import Member from "./components/Members/Member";
 
 const abPrimary = "#0B224D";
 const abSsecondary = "#FDB412";
@@ -114,7 +115,7 @@ export default class App extends Component {
             )}
           />
           <Route path="/admin" component={AdminLayout} />
-          <Route path="/Dashboard" component={ClockIn} />
+          <Route path="/Dashboard" component={MemberLayout} />
         </BrowserRouter>
       </MuiThemeProvider>
     );
