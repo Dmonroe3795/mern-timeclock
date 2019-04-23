@@ -6,7 +6,7 @@ import { BrowserRouter, Link, Route } from "react-router-dom";
 import "./App.css";
 import Button from "@material-ui/core/Button";
 import MemberLayout from "./components/Layout/MemberLayout";
-import ClockIn from "./components/Member/ClockIn";
+import ClockIn from "./components/Member/TimeClockManager";
 WebFont.load({
   google: {
     families: ["Roboto"]

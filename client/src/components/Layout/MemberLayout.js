@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Link, Route } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import ClockIn from "../Member/ClockIn"
+import TimeClockManager from "../Member/TimeClockManager"
 
 const styles = theme => ({
   inset: {
@@ -13,7 +13,10 @@ function MemberLayout(){
     return(
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={ClockIn} />
+          <TimeClockManager mem={{name: "John Doe"}} />
+            {/* <Route exact path="/" render={() =>(
+              
+            )} /> */}
           </Switch>
         </BrowserRouter>
     )
