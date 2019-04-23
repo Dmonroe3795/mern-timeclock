@@ -117,7 +117,7 @@ router.get("/member/:mId", (req, res, next) => {
   const id = req.params.mId;
 
   Session.find({ member: id })
-    .populate("group", "name")
+    .populate("partner", "name")
     .populate("member", "name")
     .exec()
     .then(docs => {

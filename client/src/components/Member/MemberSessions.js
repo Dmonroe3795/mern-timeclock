@@ -6,6 +6,7 @@ import RecentSessionCard from "../RecentActivity/RecentSessionCard"
 function MemberSessions({ member }){
     console.log(member)
     const [sessions, setSessions] = useState([])
+    const [loaded, setLoaded] = useState(false)
     function requestSessions(member){
         fetch(`/sessions/member/${member._id}`, {
             method: "GET",
@@ -21,15 +22,20 @@ function MemberSessions({ member }){
             .catch(err => {});
     }
     useEffect(() => {
-        requestSessions(member)
-        
+        if(!loaded){
+            requestSessions(member)
+            setLoaded(!loaded)
+        }
     })
    console.log("hello world")
     return(
         <div>
             Hello world
         {sessions.map(ses => ( 
-            <RecentSessionCard sesssion={ses} />
+            <div>
+            {console.log(ses)}
+            <RecentSessionCard session={ses} />
+            </div>
         ))}
         </div>
 
