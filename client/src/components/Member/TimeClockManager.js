@@ -3,6 +3,7 @@ import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 const styles = theme => ({
   custom_file_upload: {
@@ -14,7 +15,12 @@ const styles = theme => ({
 
 function ClockOutButton({ clockOutF }) {
   return (
-    <Button variant="contained" color="primary" onClick={clockOutF}>
+    <Button
+      style={{ color: "white", width: "100%", fontSize: "1.5em" }}
+      variant="contained"
+      color="secondary"
+      onClick={clockOutF}
+    >
       {" "}
       Clock Out{" "}
     </Button>
@@ -22,7 +28,12 @@ function ClockOutButton({ clockOutF }) {
 }
 function ClockInButton({ clockInF }) {
   return (
-    <Button variant="contained" color="primary" onClick={clockInF}>
+    <Button
+      style={{ color: "white", width: "100%", fontSize: "1.5em" }}
+      variant="contained"
+      color="secondary"
+      onClick={clockInF}
+    >
       {" "}
       Clock In{" "}
     </Button>
@@ -31,16 +42,12 @@ function ClockInButton({ clockInF }) {
 function DurationClock({ clockedIn }) {
   return (
     <div>
-      {clockedIn ? (
-        <Typography> Clocked in</Typography>
-      ) : (
-        <Typography> Clocked Out</Typography>
-      )}
+      {clockedIn ? <Typography variant="h6">Clocked in for</Typography> : null}
     </div>
   );
 }
 function TimeClockManager({ mem, classes }) {
-  console.log(mem)
+  console.log(mem);
   const [session, setSession] = useState({
     member: mem,
     partner: {}
@@ -81,32 +88,65 @@ function TimeClockManager({ mem, classes }) {
   }
 
   return (
-    <div>
-      <DurationClock clockedIn={clockedIn} />
-      <Typography>
-        {mem.name} {session.partner.name}
-      </Typography>
-      {clockedIn ? (
-        <ClockOutButton
-          clockOutF={() => clockOutRequest("5cb0ece43e522a95dd4c5390")}
-        />
-      ) : (
-        <ClockInButton
-          clockInF={() =>
-            clockInRequest(
-              "5cb0ece43e522a95dd4c5390",
-              "5cb399201c9d440000294b06",
-              "5cb543e7e096455bccad619b"
-            )
-          }
-        />
-      )}
-      <Button style={{ padding: 0 }}>
-        <label for="file-upload" className={classes.custom_file_upload}>
-          Custom Upload
-        </label>
-        <input id="file-upload" type="file" style={{ display: "none" }} />
-      </Button>
+    <div style={{ marginTop: 30 }}>
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        style={{}}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: 10,
+          paddingBottom: 10,
+          textAlign: "center"
+        }}
+      >
+        <Grid item xs="12">
+          <Typography
+            variant="h3"
+            color="secondary"
+            style={{ paddingTop: 30, marginBottom: 0 }}
+          >
+            {mem.name}
+          </Typography>
+          <DurationClock clockedIn={clockedIn} />
+          <Typography
+            variant="h5"
+            style={{ paddingTop: 10, paddingBottom: 20 }}
+          >
+            {session.partner.name}
+          </Typography>
+        </Grid>
+        <Grid item xs="12">
+          {clockedIn ? (
+            <ClockOutButton
+              style={{ width: "100" }}
+              clockOutF={() => clockOutRequest("5cb0ece43e522a95dd4c5390")}
+            />
+          ) : (
+            <ClockInButton
+              clockInF={() =>
+                clockInRequest(
+                  "5cb0ece43e522a95dd4c5390",
+                  "5cb399201c9d440000294b06",
+                  "5cb543e7e096455bccad619b"
+                )
+              }
+            />
+          )}
+        </Grid>
+      </Grid>
+
+      {
+        // <Button style={{ padding: 0 }}>
+        //   <label for="file-upload" className={classes.custom_file_upload}>
+        //     Custom Upload
+        //   </label>
+        //   <input id="file-upload" type="file" style={{ display: "none" }} />
+        // </Button>
+      }
     </div>
   );
 }
