@@ -52,8 +52,8 @@ class FullWidthTabs extends React.Component {
           <Tabs
             value={this.state.value}
             onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
+            indicatorColor="secondary"
+            textColor="secondary"
             variant="fullWidth"
           >
             <Tab label="groups" />

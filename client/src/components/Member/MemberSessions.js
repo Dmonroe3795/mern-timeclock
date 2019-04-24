@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RecentSessionCard from "../RecentActivity/RecentSessionCard";
+import MemberRecentSessionCard from "./MemberRecentSessionCard";
 
 function MemberSessions({ member }) {
   console.log(member);
@@ -30,7 +31,7 @@ function MemberSessions({ member }) {
     <div>
       {sessions.map(ses => (
         <div>
-          <RecentSessionCard session={ses} />
+          <MemberRecentSessionCard style={{ width: "100%" }} session={ses} />
         </div>
       ))}
     </div>
